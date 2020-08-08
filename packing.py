@@ -39,9 +39,10 @@ def packing_list():
     horizon_center = Alignment(horizontal='center')
     # row 1 align cells to vertical center
     vertical_center = Alignment(vertical='center')
+    # wrap text alignment
     wrap_text = Alignment(wrap_text=True)
     # setting color for Panmure
-    col_panmure = PatternFill(fgColor='bd291e', bgColor='FFFFFF', fill_type='solid')
+    col_panmure = PatternFill(fgColor='c6e653', bgColor='FFFFFF', fill_type='solid')
 
     # copying the cell values from source excel file to destination excel file
     for i in range(1, max_rows + 1):
@@ -53,11 +54,16 @@ def packing_list():
             new_sheet.cell(row=i, column=j).value = c.value
 
             if new_sheet.cell(row=i, column=j).value == 'Panmure':
-                print(i, j)
                 new_sheet[i][j].fill = col_panmure
 
             # making row 1 bold font
             new_sheet.cell(row=1, column=i).font = bold_font
+            # setting columns to center alignment
+            new_sheet.cell(row=i, column=1).alignment = horizon_center
+            new_sheet.cell(row=i, column=4).alignment = horizon_center
+            new_sheet.cell(row=i, column=5).alignment = horizon_center
+            new_sheet.cell(row=i, column=6).alignment = horizon_center
+            new_sheet.cell(row=i, column=7).alignment = horizon_center
             # wrapping text on columns 8-10
             new_sheet.cell(row=1, column=8).alignment = wrap_text
             new_sheet.cell(row=i, column=9).alignment = wrap_text
