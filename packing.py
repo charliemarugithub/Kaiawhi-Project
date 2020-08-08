@@ -1,5 +1,5 @@
 import openpyxl as xl
-from openpyxl.styles import Font, Fill, Color, colors, PatternFill, Alignment
+from openpyxl.styles import Font, PatternFill, Alignment
 from openpyxl import Workbook
 
 # creating a variable to take any filename input from user
@@ -54,7 +54,7 @@ def packing_list():
 
             if new_sheet.cell(row=i, column=j).value == 'Panmure':
                 print(i, j)
-                new_sheet['C11'].fill = col_panmure
+                new_sheet[i][j].fill = col_panmure
 
             # making row 1 bold font
             new_sheet.cell(row=1, column=i).font = bold_font
