@@ -50,6 +50,8 @@ def delivery_list():
     col_ptengland = PatternFill(fgColor='d9b36c', fill_type='solid')
     col_gi = PatternFill(fgColor='8d9cf0', fill_type='solid')
     col_stjohns = PatternFill(fgColor='ba6cd9', fill_type='solid')
+    # setting color for 'Total' column
+    totals_color = PatternFill(fgColor='f23b38', fill_type='solid')
 
     # copying the cell values from source excel file to destination excel file
     for i in range(1, max_rows + 1):
@@ -83,6 +85,9 @@ def delivery_list():
             new_sheet.cell(row=i, column=j).border = border
             # wrapping text on columns 9
             new_sheet.cell(row=i, column=9).alignment = wrap_text
+            # setting 'Totals' color column to red and bold font
+            new_sheet.cell(row=i, column=8).fill = totals_color
+            new_sheet.cell(row=i, column=8).font = bold_font
             # setting specific column widths
             new_sheet_name.column_dimensions['A'].width = 18
             new_sheet_name.column_dimensions['B'].width = 28

@@ -29,7 +29,6 @@ def packing_list():
     sheet['G1'].value = "Adults"
     sheet['H1'].value = "Packing Instructions"
     sheet['I1'].value = "Are there any items you dont want included?"
-    sheet['J1'].value = "Testing slave branch in git"
 
     # calculate total number of rows and columns in source excel file
     max_rows = sheet.max_row
