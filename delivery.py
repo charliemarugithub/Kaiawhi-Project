@@ -56,7 +56,7 @@ def delivery_list():
     col_mangere = PatternFill(fgColor='e4f0a1', fill_type='solid')
     col_pakuranga = PatternFill(fgColor='e4e86d', fill_type='solid')
     # setting color for 'Total' column
-    totals_color = PatternFill(fgColor='f23b38', fill_type='solid')
+    totals_color = PatternFill(fgColor='fac2b4', fill_type='solid')
 
     # copying the cell values from source excel file to destination excel file
     for i in range(1, max_rows + 1):

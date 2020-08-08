@@ -57,6 +57,8 @@ def packing_list():
     col_greenlane = PatternFill(fgColor='f0daa1', fill_type='solid')
     col_mangere = PatternFill(fgColor='e4f0a1', fill_type='solid')
     col_pakuranga = PatternFill(fgColor='e4e86d', fill_type='solid')
+    # setting color for 'Total' column
+    totals_color = PatternFill(fgColor='fac2b4', fill_type='solid')
 
     # copying the cell values from source excel file to destination excel file
     for i in range(1, max_rows + 1):
@@ -102,6 +104,9 @@ def packing_list():
             new_sheet.cell(row=i, column=8).alignment = wrap_text
             new_sheet.cell(row=i, column=9).alignment = wrap_text
             new_sheet.cell(row=i, column=10).alignment = wrap_text
+            # setting 'Totals' color column to red and bold font
+            new_sheet.cell(row=i, column=5).fill = totals_color
+            new_sheet.cell(row=i, column=5).font = bold_font
             # setting specific column widths
             new_sheet_name.column_dimensions['A'].width = 21.5
             new_sheet_name.column_dimensions['B'].width = 35
