@@ -1,6 +1,6 @@
 import openpyxl as xl
-from openpyxl.styles import Font, PatternFill, Alignment
-
+from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+from openpyxl.styles.borders import BORDER_THIN
 
 # creating a variable to take any filename input from user
 filename = input('Enter Delivery List filename here: ')
@@ -37,10 +37,14 @@ def delivery_list():
     bold_font = Font(name='Arial', size=12, bold=True)
     # cell alignment to center
     horizon_center = Alignment(horizontal='center')
-    # row 1 align cells to vertical center
-    vertical_center = Alignment(vertical='center')
     # wrap text alignment
     wrap_text = Alignment(wrap_text=True)
+    border = Border(
+                left=Side(border_style=BORDER_THIN, color='a8a1ad'),
+                right=Side(border_style=BORDER_THIN, color='a8a1ad'),
+                top=Side(border_style=BORDER_THIN, color='a8a1ad'),
+                bottom=Side(border_style=BORDER_THIN, color='a8a1ad')
+                )
     # setting colors for each suburb
     col_panmure = PatternFill(fgColor='80e098', fill_type='solid')
     col_ptengland = PatternFill(fgColor='d9b36c', fill_type='solid')
@@ -75,6 +79,8 @@ def delivery_list():
             new_sheet.cell(row=i, column=j).alignment = horizon_center
             # setting all row height to 30
             new_sheet_name.row_dimensions[i].height = 30
+            # setting borders for all cells
+            new_sheet.cell(row=i, column=j).border = border
             # wrapping text on columns 9
             new_sheet.cell(row=i, column=9).alignment = wrap_text
             # setting specific column widths
