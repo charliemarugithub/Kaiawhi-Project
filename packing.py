@@ -52,6 +52,11 @@ def packing_list():
     col_ptengland = PatternFill(fgColor='d9b36c', fill_type='solid')
     col_gi = PatternFill(fgColor='8d9cf0', fill_type='solid')
     col_stjohns = PatternFill(fgColor='ba6cd9', fill_type='solid')
+    col_glendowie = PatternFill(fgColor='d98aed', fill_type='solid')
+    col_mtwell = PatternFill(fgColor='a1f0a9', fill_type='solid')
+    col_greenlane = PatternFill(fgColor='f0daa1', fill_type='solid')
+    col_mangere = PatternFill(fgColor='e4f0a1', fill_type='solid')
+    col_pakuranga = PatternFill(fgColor='e4e86d', fill_type='solid')
 
     # copying the cell values from source excel file to destination excel file
     for i in range(1, max_rows + 1):
@@ -74,6 +79,16 @@ def packing_list():
                         cell.fill = col_gi
                     if cell.value == 'St Johns':
                         cell.fill = col_stjohns
+                    if cell.value == 'Glendowie':
+                        cell.fill = col_glendowie
+                    if cell.value == 'Mt Wellington':
+                        cell.fill = col_mtwell
+                    if cell.value == 'Greenlane':
+                        cell.fill = col_greenlane
+                    if cell.value == 'Mangere':
+                        cell.fill = col_mangere
+                    if cell.value == 'Pakuranga':
+                        cell.fill = col_pakuranga
 
             # making row 1 bold font
             new_sheet.cell(row=1, column=i).font = bold_font
