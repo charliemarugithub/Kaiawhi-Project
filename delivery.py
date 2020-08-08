@@ -71,21 +71,13 @@ def delivery_list():
 
             # making row 1 bold font
             new_sheet.cell(row=1, column=i).font = bold_font
-            # setting columns to center alignment
-            new_sheet.cell(row=i, column=3).alignment = horizon_center
-            new_sheet.cell(row=i, column=5).alignment = horizon_center
-            new_sheet.cell(row=i, column=6).alignment = horizon_center
-            new_sheet.cell(row=i, column=7).alignment = horizon_center
-            new_sheet.cell(row=i, column=8).alignment = horizon_center
-            new_sheet.cell(row=i, column=9).alignment = horizon_center
-            # wrapping text on columns 8-10
-            new_sheet.cell(row=1, column=8).alignment = wrap_text
+            # text alignment for all rows
+            new_sheet.cell(row=i, column=j).alignment = horizon_center
+            # setting all row height to 30
+            new_sheet_name.row_dimensions[i].height = 30
+            # wrapping text on columns 9
             new_sheet.cell(row=i, column=9).alignment = wrap_text
-            # text alignment for row 1
-            new_sheet.cell(row=1, column=j).alignment = vertical_center
-            new_sheet.cell(row=1, column=j).alignment = horizon_center
-
-            new_sheet_name.row_dimensions[i].height = 25
+            # setting specific column widths
             new_sheet_name.column_dimensions['A'].width = 18
             new_sheet_name.column_dimensions['B'].width = 28
             new_sheet_name.column_dimensions['C'].width = 35
@@ -94,7 +86,7 @@ def delivery_list():
             new_sheet_name.column_dimensions['F'].width = 25
             new_sheet_name.column_dimensions['G'].width = 60
             new_sheet_name.column_dimensions['H'].width = 12
-            new_sheet_name.column_dimensions['I'].width = 100
+            new_sheet_name.column_dimensions['I'].width = 75
 
     # saving new worksheet to desktop with name packing_list
     wb.remove_sheet(sheet)
