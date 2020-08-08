@@ -41,8 +41,11 @@ def packing_list():
     vertical_center = Alignment(vertical='center')
     # wrap text alignment
     wrap_text = Alignment(wrap_text=True)
-    # setting color for Panmure
-    col_panmure = PatternFill(fgColor='c6e653', bgColor='FFFFFF', fill_type='solid')
+    # setting colors for each suburb
+    col_panmure = PatternFill(fgColor='80e098', fill_type='solid')
+    col_ptengland = PatternFill(fgColor='d9b36c', fill_type='solid')
+    col_gi = PatternFill(fgColor='8d9cf0', fill_type='solid')
+    col_stjohns = PatternFill(fgColor='ba6cd9', fill_type='solid')
 
     # copying the cell values from source excel file to destination excel file
     for i in range(1, max_rows + 1):
@@ -53,8 +56,18 @@ def packing_list():
             # writing the read value to destination excel file
             new_sheet.cell(row=i, column=j).value = c.value
 
-            if new_sheet.cell(row=i, column=j).value == 'Panmure':
-                new_sheet[i][j].fill = col_panmure
+            for row in new_sheet_name['A1:J100']:
+                for cell in row:
+                    if cell.value == 'Panmure':
+                        cell.fill = col_panmure
+                    if cell.value == 'Pt England':
+                        cell.fill = col_ptengland
+                    if cell.value == 'Point England':
+                        cell.fill = col_ptengland
+                    if cell.value == 'Glen Innes':
+                        cell.fill = col_gi
+                    if cell.value == 'St Johns':
+                        cell.fill = col_stjohns
 
             # making row 1 bold font
             new_sheet.cell(row=1, column=i).font = bold_font
