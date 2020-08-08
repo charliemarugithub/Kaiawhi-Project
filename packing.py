@@ -1,6 +1,6 @@
 import openpyxl as xl
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
-from openpyxl.styles.borders import BORDER_THIN
+from openpyxl.styles.borders import BORDER_THICK
 
 # creating a variable to take any filename input from user
 filename = input('Enter Packing List filename here: ')
@@ -27,6 +27,7 @@ def packing_list():
     sheet['E1'].value = "Total"
     sheet['F1'].value = "Children"
     sheet['G1'].value = "Adults"
+    sheet['H1'].value = "Packing Instructions"
     sheet['I1'].value = "Are there any items you dont want included?"
 
     # calculate total number of rows and columns in source excel file
@@ -41,10 +42,10 @@ def packing_list():
     wrap_text = Alignment(wrap_text=True)
     # setting border types
     border = Border(
-                left=Side(border_style=BORDER_THIN, color='a8a1ad'),
-                right=Side(border_style=BORDER_THIN, color='a8a1ad'),
-                top=Side(border_style=BORDER_THIN, color='a8a1ad'),
-                bottom=Side(border_style=BORDER_THIN, color='a8a1ad')
+                left=Side(border_style=BORDER_THICK, color='a8a1ad'),
+                right=Side(border_style=BORDER_THICK, color='a8a1ad'),
+                top=Side(border_style=BORDER_THICK, color='a8a1ad'),
+                bottom=Side(border_style=BORDER_THICK, color='a8a1ad')
                 )
     # setting colors for each suburb
     col_panmure = PatternFill(fgColor='80e098', fill_type='solid')

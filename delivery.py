@@ -1,6 +1,6 @@
 import openpyxl as xl
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
-from openpyxl.styles.borders import BORDER_THIN
+from openpyxl.styles.borders import BORDER_THICK
 
 # creating a variable to take any filename input from user
 filename = input('Enter Delivery List filename here: ')
@@ -40,10 +40,10 @@ def delivery_list():
     # wrap text alignment
     wrap_text = Alignment(wrap_text=True)
     border = Border(
-                left=Side(border_style=BORDER_THIN, color='a8a1ad'),
-                right=Side(border_style=BORDER_THIN, color='a8a1ad'),
-                top=Side(border_style=BORDER_THIN, color='a8a1ad'),
-                bottom=Side(border_style=BORDER_THIN, color='a8a1ad')
+                left=Side(border_style=BORDER_THICK, color='a8a1ad'),
+                right=Side(border_style=BORDER_THICK, color='a8a1ad'),
+                top=Side(border_style=BORDER_THICK, color='a8a1ad'),
+                bottom=Side(border_style=BORDER_THICK, color='a8a1ad')
                 )
     # setting colors for each suburb
     col_panmure = PatternFill(fgColor='80e098', fill_type='solid')
