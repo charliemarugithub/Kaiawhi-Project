@@ -1,10 +1,10 @@
 import openpyxl as xl
 from openpyxl.styles import Font, PatternFill, Alignment
-from openpyxl import Workbook
+
 
 # creating a variable to take any filename input from user
-filename = input('Enter Packing List filename here: ')
-new_sheet_name = input('Enter new sheet name for Packing List: ')
+filename = input('Enter Delivery List filename here: ')
+new_sheet_name = input('Enter new sheet name for Delivery List: ')
 
 # loading workbook on local computer c drive using filename
 wb = xl.load_workbook(f'c:\\Users\\Charlie\\Desktop\\{filename}.xlsx')
@@ -17,17 +17,17 @@ new_sheet.title = new_sheet_name
 new_sheet_name = wb.active
 
 
-# defining packing list function
-def packing_list():
+# defining delivery list function
+def delivery_list():
     # deleting columns so that columns required are left for new file
-    sheet.delete_cols(1, 9)
-    sheet.delete_cols(5)
+    sheet.delete_cols(1, 7)
+    sheet.delete_cols(9, 4)
 
     # updating Column Names
-    sheet['E1'].value = "Total"
-    sheet['F1'].value = "Children"
-    sheet['G1'].value = "Adults"
-    sheet['I1'].value = "Are there any items you dont want included?"
+    sheet['A1'].value = "First Name"
+    sheet['C1'].value = "Address Number"
+    sheet['G1'].value = "Delivery Instructions"
+    sheet['H1'].value = "Total"
 
     # calculate total number of rows and columns in source excel file
     max_rows = sheet.max_row
@@ -72,34 +72,30 @@ def packing_list():
             # making row 1 bold font
             new_sheet.cell(row=1, column=i).font = bold_font
             # setting columns to center alignment
-            new_sheet.cell(row=i, column=1).alignment = horizon_center
-            new_sheet.cell(row=i, column=4).alignment = horizon_center
+            new_sheet.cell(row=i, column=3).alignment = horizon_center
             new_sheet.cell(row=i, column=5).alignment = horizon_center
             new_sheet.cell(row=i, column=6).alignment = horizon_center
             new_sheet.cell(row=i, column=7).alignment = horizon_center
+            new_sheet.cell(row=i, column=8).alignment = horizon_center
+            new_sheet.cell(row=i, column=9).alignment = horizon_center
             # wrapping text on columns 8-10
             new_sheet.cell(row=1, column=8).alignment = wrap_text
             new_sheet.cell(row=i, column=9).alignment = wrap_text
-            new_sheet.cell(row=i, column=10).alignment = wrap_text
             # text alignment for row 1
             new_sheet.cell(row=1, column=j).alignment = vertical_center
             new_sheet.cell(row=1, column=j).alignment = horizon_center
 
-            # setting each column width to size
-            # set the width of the column
-            # I need to learn to iterate over this properly and set auto_size
             new_sheet_name.row_dimensions[i].height = 25
-            new_sheet_name.column_dimensions['A'].width = 21.5
-            new_sheet_name.column_dimensions['B'].width = 35
-            new_sheet_name.column_dimensions['C'].width = 27
-            new_sheet_name.column_dimensions['D'].width = 25
-            new_sheet_name.column_dimensions['E'].width = 9
-            new_sheet_name.column_dimensions['F'].width = 12.5
-            new_sheet_name.column_dimensions['G'].width = 9.8
-            new_sheet_name.column_dimensions['H'].width = 85
-            new_sheet_name.column_dimensions['I'].width = 85
-            new_sheet_name.column_dimensions['J'].width = 120
+            new_sheet_name.column_dimensions['A'].width = 18
+            new_sheet_name.column_dimensions['B'].width = 28
+            new_sheet_name.column_dimensions['C'].width = 35
+            new_sheet_name.column_dimensions['D'].width = 35
+            new_sheet_name.column_dimensions['E'].width = 30
+            new_sheet_name.column_dimensions['F'].width = 25
+            new_sheet_name.column_dimensions['G'].width = 60
+            new_sheet_name.column_dimensions['H'].width = 12
+            new_sheet_name.column_dimensions['I'].width = 100
 
     # saving new worksheet to desktop with name packing_list
     wb.remove_sheet(sheet)
-    wb.save('c:\\Users\\Charlie\\Desktop\\packing_list.xlsx')
+    wb.save('c:\\Users\\Charlie\\Desktop\\delivery_list.xlsx')
