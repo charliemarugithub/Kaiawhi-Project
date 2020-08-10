@@ -1,20 +1,19 @@
 import openpyxl as xl
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.styles.borders import BORDER_THICK
-from app import filename_entry, sheet_name_entry
+# from app import filename_entry, sheet_name_example_label
 
-# creating a variable to take any filename input from user
-# filename = input('Enter Packing List filename here: ')
+'''
+def make_packing_list():
+    x1 = filename_entry.get()
+    string_to_display = "Hello " + x1
+    sheet_name_example_label["text"] = string_to_display
 
 
-# defining packing list function
-def packing_list():
-    get_filename_entry = filename_entry.get()
     # loading workbook on local computer c drive using filename
-    wb = xl.load_workbook(f'c:\\Users\\Charlie\\Desktop\\{get_filename_entry}.xlsx')
+    wb = xl.load_workbook(f'c:\\Users\\Charlie\\Desktop\\{x1}.xlsx')
 
     # new_sheet_name = input('Enter new sheet name for Packing List: ')
-
     # working with sheet1 on wb 'workbook'
     sheet = wb['Form responses 3']
 
@@ -124,3 +123,4 @@ def packing_list():
     # saving new worksheet to desktop with name packing_list
     wb.remove_sheet(sheet)
     wb.save('c:\\Users\\Charlie\\Desktop\\packing_list.xlsx')
+    '''

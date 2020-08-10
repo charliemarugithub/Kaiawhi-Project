@@ -1,7 +1,9 @@
 import openpyxl as xl
 import tkinter as tk
+from tkinter import ttk
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.styles.borders import BORDER_THICK
+
 
 root = tk.Tk()
 
@@ -25,26 +27,24 @@ main_form.create_window(200, 100, window=sheet_name_example_label)
 sheet_name_entry = tk.Entry(root)
 main_form.create_window(200, 130, window=sheet_name_entry)
 
-# loading workbook on local computer c drive using filename
-wb = xl.load_workbook(f'c:\\Users\\Charlie\\Desktop\\kaiawhi.xlsx')
 
-# new_sheet_name = input('Enter new sheet name for Packing List: ')
+def make_packing_list():
+    # get method for filename entry
+    x1 = filename_entry.get()
 
-# working with sheet1 on wb 'workbook'
-sheet = wb['Form responses 3']
+    # loading workbook on local computer c drive using filename
+    wb = xl.load_workbook(f'c:\\Users\\Charlie\\Desktop\\{x1}.xlsx')
 
-new_sheet = wb.create_sheet("Sheet A", 0)
-# new_sheet.title = sheet_name_entry
-sheet_name_entry = wb.active
+    # working with sheet1 on wb 'workbook'
+    sheet = wb['Form responses 3']
 
+    # get method for new sheet name
+    x2 = sheet_name_entry.get()
+    new_sheet = wb.create_sheet("Sheet A", 0)
+    new_sheet.title = x2
+    x2 = wb.active
 
-def packing_list():
-    print("Packing List")
-    '''
-    # get_filename_entry = filename_entry.get()
-    get_sheet_name_entry = sheet_name_entry.get()
-
-    # deleting columns so that columns required are left for new file
+# deleting columns so that columns required are left for new file
     sheet.delete_cols(1, 9)
     sheet.delete_cols(5)
 
@@ -94,7 +94,7 @@ def packing_list():
             # writing the read value to destination excel file
             new_sheet.cell(row=i, column=j).value = c.value
 
-            for row in get_sheet_name_entry['A1:J100']:
+            for row in x2['A1:J100']:
                 for cell in row:
                     if cell.value == 'Panmure':
                         cell.fill = col_panmure
@@ -122,7 +122,7 @@ def packing_list():
             # text alignment for all rows
             new_sheet.cell(row=i, column=j).alignment = horizon_center
             # setting all row height to 30
-            get_sheet_name_entry.row_dimensions[i].height = 30
+            x2.row_dimensions[i].height = 30
             # setting borders for all cells
             new_sheet.cell(row=i, column=j).border = border
             # wrapping text on columns 8-10
@@ -133,31 +133,26 @@ def packing_list():
             new_sheet.cell(row=i, column=5).fill = totals_color
             new_sheet.cell(row=i, column=5).font = bold_font
             # setting specific column widths
-            get_sheet_name_entry.column_dimensions['A'].width = 21.5
-            get_sheet_name_entry.column_dimensions['B'].width = 35
-            get_sheet_name_entry.column_dimensions['C'].width = 27
-            get_sheet_name_entry.column_dimensions['D'].width = 25
-            get_sheet_name_entry.column_dimensions['E'].width = 9
-            get_sheet_name_entry.column_dimensions['F'].width = 12.5
-            get_sheet_name_entry.column_dimensions['G'].width = 9.8
-            get_sheet_name_entry.column_dimensions['H'].width = 75
-            get_sheet_name_entry.column_dimensions['I'].width = 75
-            get_sheet_name_entry.column_dimensions['J'].width = 75
+            x2.column_dimensions['A'].width = 21.5
+            x2.column_dimensions['B'].width = 35
+            x2.column_dimensions['C'].width = 27
+            x2.column_dimensions['D'].width = 25
+            x2.column_dimensions['E'].width = 9
+            x2.column_dimensions['F'].width = 12.5
+            x2.column_dimensions['G'].width = 9.8
+            x2.column_dimensions['H'].width = 75
+            x2.column_dimensions['I'].width = 75
+            x2.column_dimensions['J'].width = 75
 
     # saving new worksheet to desktop with name packing_list
-    wb.remove_sheet(sheet)
+    wb.remove(sheet)
     wb.save('c:\\Users\\Charlie\\Desktop\\packing_list.xlsx')
-    '''
 
 
-def delivery_list():
-    print("Delivery List")
-
-
-packing_button = tk.Button(text='Packing List', command=packing_list)
+packing_button = ttk.Button(text='Packing List', command=make_packing_list)
 main_form.create_window(150, 180, window=packing_button)
 
-delivery_button = tk.Button(text='Delivery List', command=delivery_list)
-main_form.create_window(250, 180, window=delivery_button)
+# delivery_button = ttk.Button(text='Delivery List', command=make_delivery_list)
+# main_form.create_window(250, 180, window=delivery_button)
 
 root.mainloop()

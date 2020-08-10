@@ -2,23 +2,11 @@ import openpyxl as xl
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.styles.borders import BORDER_THICK
 
-# creating a variable to take any filename input from user
-filename = input('Enter Delivery List filename here: ')
-new_sheet_name = input('Enter new sheet name for Delivery List: ')
-
-# loading workbook on local computer c drive using filename
-wb = xl.load_workbook(f'c:\\Users\\Charlie\\Desktop\\{filename}.xlsx')
-
-# working with sheet1 on wb 'workbook'
-sheet = wb['Form responses 3']
-
-new_sheet = wb.create_sheet("Sheet A", 0)
-new_sheet.title = new_sheet_name
-new_sheet_name = wb.active
-
 
 # defining delivery list function
-def delivery_list():
+def make_delivery_list():
+    print('Delivery LIst')
+    '''
     # deleting columns so that columns required are left for new file
     sheet.delete_cols(1, 7)
     sheet.delete_cols(9, 4)
@@ -117,3 +105,4 @@ def delivery_list():
     # saving new worksheet to desktop with name packing_list
     wb.remove_sheet(sheet)
     wb.save('c:\\Users\\Charlie\\Desktop\\delivery_list.xlsx')
+    '''
