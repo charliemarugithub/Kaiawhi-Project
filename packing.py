@@ -1,24 +1,26 @@
 import openpyxl as xl
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.styles.borders import BORDER_THICK
+from app import filename_entry, sheet_name_entry
 
 # creating a variable to take any filename input from user
-filename = input('Enter Packing List filename here: ')
-new_sheet_name = input('Enter new sheet name for Packing List: ')
-
-# loading workbook on local computer c drive using filename
-wb = xl.load_workbook(f'c:\\Users\\Charlie\\Desktop\\{filename}.xlsx')
-
-# working with sheet1 on wb 'workbook'
-sheet = wb['Form responses 3']
-
-new_sheet = wb.create_sheet("Sheet A", 0)
-new_sheet.title = new_sheet_name
-new_sheet_name = wb.active
+# filename = input('Enter Packing List filename here: ')
 
 
 # defining packing list function
 def packing_list():
+    get_filename_entry = filename_entry.get()
+    # loading workbook on local computer c drive using filename
+    wb = xl.load_workbook(f'c:\\Users\\Charlie\\Desktop\\{get_filename_entry}.xlsx')
+
+    # new_sheet_name = input('Enter new sheet name for Packing List: ')
+
+    # working with sheet1 on wb 'workbook'
+    sheet = wb['Form responses 3']
+
+    new_sheet = wb.create_sheet("Sheet A", 0)
+    new_sheet.title = sheet_name_entry
+    new_sheet_name = wb.active
     # deleting columns so that columns required are left for new file
     sheet.delete_cols(1, 9)
     sheet.delete_cols(5)
