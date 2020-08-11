@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.styles.borders import BORDER_THICK
+from functions import file_not_found, no_filename
 
 # creating instance of TK class
 from openpyxl.utils.exceptions import InvalidFileException
@@ -279,14 +280,6 @@ def make_delivery_list():
 
     except InvalidFileException:
         no_filename()
-
-
-def file_not_found():
-    messagebox.showinfo("File Name Error!", "File Not Found, Type Correct File Name.")
-
-
-def no_filename():
-    messagebox.showinfo("File Name Cannot Be Empty!", "You Must Enter A File Name.")
 
 
 packing_button = ttk.Button(text='Packing List', command=make_packing_list)
