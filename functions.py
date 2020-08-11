@@ -1,4 +1,4 @@
-from tkinter import messagebox
+from tkinter import messagebox, DISABLED
 
 
 def file_not_found():
@@ -17,5 +17,9 @@ def report_generating():
     messagebox.showinfo("Report!", "Your Report Is Being Generated.")
 
 
+# def disable_packing_btn():
+# packing_button.config(state=DISABLED)
 
 
+# def disable_delivery_btn():
+# delivery_button.config(state=DISABLED)

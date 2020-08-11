@@ -15,8 +15,6 @@ main_form.configure(background="#7289f2")
 # name root title page
 root.title('Kaiawhi Program')
 
-# icon
-root.iconbitmap('D:\Kaiawhi Folder\kaiawhiconImg.ico')
 # creating label for filename and placing it in root
 filename_label = tk.Label(root, text='Enter source file name: ', bg='#7289f2', font="Helvetica 16")
 main_form.create_window(250, 40, window=filename_label)
@@ -168,6 +166,9 @@ def make_packing_list():
     except ValueError:
         no_sheet_name()
 
+    packing_button.config(state=tk.DISABLED)
+    sheet_name_entry.delete(0, tk.END)
+
 
 def make_delivery_list():
     # get method for filename entry
@@ -292,6 +293,9 @@ def make_delivery_list():
 
     except ValueError:
         no_sheet_name()
+
+    delivery_button.config(state=tk.DISABLED)
+    sheet_name_entry.delete(0, tk.END)
 
 
 packing_button = ttk.Button(text='Packing List', command=make_packing_list)
