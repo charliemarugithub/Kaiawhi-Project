@@ -1,39 +1,42 @@
 import openpyxl as xl
 import tkinter as tk
-from tkinter import ttk, messagebox
+from tkinter import ttk
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.styles.borders import BORDER_THICK
 from functions import file_not_found, no_filename, no_sheet_name, report_generating
+from openpyxl.utils.exceptions import InvalidFileException
+from PIL import ImageTk, Image
 
 # creating instance of TK class
-from openpyxl.utils.exceptions import InvalidFileException
-
 root = tk.Tk()
 # creating main form window and packing it
-main_form = tk.Canvas(root, width=400, height=300)
+main_form = tk.Canvas(root, width=500, height=400)
 main_form.pack()
+main_form.configure(background="#7289f2")
 # name root title page
 root.title('Kaiawhi Program')
 
+# icon
+root.iconbitmap('D:\Kaiawhi Folder\kaiawhiconImg.ico')
 # creating label for filename and placing it in root
-filename_label = tk.Label(root, text='Enter source file name: ')
-main_form.create_window(200, 20, window=filename_label)
+filename_label = tk.Label(root, text='Enter source file name: ', bg='#7289f2', font="Helvetica 16")
+main_form.create_window(250, 40, window=filename_label)
 
 # creating entry for filename and placing it in root
-filename_entry = tk.Entry(root)
-main_form.create_window(200, 40, window=filename_entry)
+filename_entry = tk.Entry(root, font="Helvetica, 16")
+main_form.create_window(250, 80, window=filename_entry, width=220, height=25)
 
 # creating label for sheet name and placing it in root
-sheet_name_label = tk.Label(root, text='Enter new sheet name:')
-main_form.create_window(200, 80, window=sheet_name_label)
+sheet_name_label = tk.Label(root, text='Enter new sheet name:', bg='#7289f2', font="Helvetica 16")
+main_form.create_window(250, 120, window=sheet_name_label)
 
 # creating entry for sheet name  and placing it in root
-sheet_name_example_label = tk.Label(root, text='eg 10 Aug Packing List')
-main_form.create_window(200, 100, window=sheet_name_example_label)
+sheet_name_example_label = tk.Label(root, text='eg 10 Aug Packing List', bg='#7289f2', font="Helvetica 16")
+main_form.create_window(250, 150, window=sheet_name_example_label)
 
 # creating entry for sheet name and placing it in root
-sheet_name_entry = tk.Entry(root)
-main_form.create_window(200, 130, window=sheet_name_entry)
+sheet_name_entry = tk.Entry(root, font="Helvetica, 16")
+main_form.create_window(250, 185, window=sheet_name_entry, width=220, height=25)
 
 
 def make_packing_list():
@@ -293,9 +296,9 @@ def make_delivery_list():
 
 
 packing_button = ttk.Button(text='Packing List', command=make_packing_list)
-main_form.create_window(150, 180, window=packing_button)
+main_form.create_window(200, 240, window=packing_button)
 
 delivery_button = ttk.Button(text='Delivery List', command=make_delivery_list)
-main_form.create_window(250, 180, window=delivery_button)
+main_form.create_window(300, 240, window=delivery_button, height=25)
 
 root.mainloop()
