@@ -5,6 +5,8 @@ from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.styles.borders import BORDER_THICK
 
 # creating instance of TK class
+from openpyxl.utils.exceptions import InvalidFileException
+
 root = tk.Tk()
 # creating main form window and packing it
 main_form = tk.Canvas(root, width=400, height=300)
@@ -46,7 +48,7 @@ def make_packing_list():
         new_sheet.title = x2
         x2 = wb.active
 
-    # deleting columns so that columns required are left for new file
+        # deleting columns so that columns required are left for new file
         sheet.delete_cols(1, 9)
         sheet.delete_cols(5)
 
@@ -69,11 +71,11 @@ def make_packing_list():
         wrap_text = Alignment(wrap_text=True)
         # setting border types
         border = Border(
-                    left=Side(border_style=BORDER_THICK, color='a8a1ad'),
-                    right=Side(border_style=BORDER_THICK, color='a8a1ad'),
-                    top=Side(border_style=BORDER_THICK, color='a8a1ad'),
-                    bottom=Side(border_style=BORDER_THICK, color='a8a1ad')
-                    )
+            left=Side(border_style=BORDER_THICK, color='a8a1ad'),
+            right=Side(border_style=BORDER_THICK, color='a8a1ad'),
+            top=Side(border_style=BORDER_THICK, color='a8a1ad'),
+            bottom=Side(border_style=BORDER_THICK, color='a8a1ad')
+        )
         # setting colors for each suburb
         col_panmure = PatternFill(fgColor='80e098', fill_type='solid')
         col_ptengland = PatternFill(fgColor='d9b36c', fill_type='solid')
@@ -153,6 +155,9 @@ def make_packing_list():
     except FileNotFoundError:
         file_not_found()
 
+    except InvalidFileException:
+        no_filename()
+
 
 def make_delivery_list():
     # get method for filename entry
@@ -191,11 +196,11 @@ def make_delivery_list():
         # wrap text alignment
         wrap_text = Alignment(wrap_text=True)
         border = Border(
-                    left=Side(border_style=BORDER_THICK, color='a8a1ad'),
-                    right=Side(border_style=BORDER_THICK, color='a8a1ad'),
-                    top=Side(border_style=BORDER_THICK, color='a8a1ad'),
-                    bottom=Side(border_style=BORDER_THICK, color='a8a1ad')
-                    )
+            left=Side(border_style=BORDER_THICK, color='a8a1ad'),
+            right=Side(border_style=BORDER_THICK, color='a8a1ad'),
+            top=Side(border_style=BORDER_THICK, color='a8a1ad'),
+            bottom=Side(border_style=BORDER_THICK, color='a8a1ad')
+        )
         # setting colors for each suburb
         col_panmure = PatternFill(fgColor='80e098', fill_type='solid')
         col_ptengland = PatternFill(fgColor='d9b36c', fill_type='solid')
@@ -272,9 +277,16 @@ def make_delivery_list():
     except FileNotFoundError:
         file_not_found()
 
+    except InvalidFileException:
+        no_filename()
+
 
 def file_not_found():
-    messagebox.showinfo("File Name Error!", "File Not Found, Type correct file name.")
+    messagebox.showinfo("File Name Error!", "File Not Found, Type Correct File Name.")
+
+
+def no_filename():
+    messagebox.showinfo("File Name Cannot Be Empty!", "You Must Enter A File Name.")
 
 
 packing_button = ttk.Button(text='Packing List', command=make_packing_list)
