@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.styles.borders import BORDER_THICK
-from functions import file_not_found, no_filename
+from functions import file_not_found, no_filename, no_sheet_name, report_generating
 
 # creating instance of TK class
 from openpyxl.utils.exceptions import InvalidFileException
@@ -18,15 +18,19 @@ root.title('Kaiawhi Program')
 # creating label for filename and placing it in root
 filename_label = tk.Label(root, text='Enter source file name: ')
 main_form.create_window(200, 20, window=filename_label)
+
 # creating entry for filename and placing it in root
 filename_entry = tk.Entry(root)
 main_form.create_window(200, 40, window=filename_entry)
+
 # creating label for sheet name and placing it in root
 sheet_name_label = tk.Label(root, text='Enter new sheet name:')
 main_form.create_window(200, 80, window=sheet_name_label)
+
 # creating entry for sheet name  and placing it in root
 sheet_name_example_label = tk.Label(root, text='eg 10 Aug Packing List')
 main_form.create_window(200, 100, window=sheet_name_example_label)
+
 # creating entry for sheet name and placing it in root
 sheet_name_entry = tk.Entry(root)
 main_form.create_window(200, 130, window=sheet_name_entry)
@@ -159,6 +163,9 @@ def make_packing_list():
     except InvalidFileException:
         no_filename()
 
+    except ValueError:
+        no_sheet_name()
+
 
 def make_delivery_list():
     # get method for filename entry
@@ -280,6 +287,9 @@ def make_delivery_list():
 
     except InvalidFileException:
         no_filename()
+
+    except ValueError:
+        no_sheet_name()
 
 
 packing_button = ttk.Button(text='Packing List', command=make_packing_list)
