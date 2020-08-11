@@ -3,9 +3,8 @@ import tkinter as tk
 from tkinter import ttk
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.styles.borders import BORDER_THICK
-from functions import file_not_found, no_filename, no_sheet_name, report_generating
+from functions import file_not_found, no_filename, no_sheet_name
 from openpyxl.utils.exceptions import InvalidFileException
-from PIL import ImageTk, Image
 
 # creating instance of TK class
 root = tk.Tk()
@@ -296,9 +295,9 @@ def make_delivery_list():
 
 
 packing_button = ttk.Button(text='Packing List', command=make_packing_list)
-main_form.create_window(200, 240, window=packing_button)
+main_form.create_window(150, 260, window=packing_button, height=50, width=150)
 
 delivery_button = ttk.Button(text='Delivery List', command=make_delivery_list)
-main_form.create_window(300, 240, window=delivery_button, height=25)
+main_form.create_window(350, 260, window=delivery_button, height=50, width=150)
 
 root.mainloop()
