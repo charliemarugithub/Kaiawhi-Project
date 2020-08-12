@@ -42,7 +42,7 @@ def make_packing_list():
 
     try:
         # loading workbook on local computer c drive using filename
-        wb = xl.load_workbook(f'c:\\Users\\Charlie\\Desktop\\{x1}.xlsx')
+        wb = xl.load_workbook(f'c:\\Users\\Charlie\\Desktop\\{x1.strip()}.xlsx')
 
         # working with sheet1 on wb 'workbook'
         sheet = wb['Form responses 3']
@@ -174,7 +174,7 @@ def make_delivery_list():
     x1 = filename_entry.get()
     try:
         # loading workbook on local computer c drive using filename
-        wb = xl.load_workbook(f'c:\\Users\\Charlie\\Desktop\\{x1}.xlsx')
+        wb = xl.load_workbook(f'c:\\Users\\Charlie\\Desktop\\{x1.strip()}.xlsx')
 
         # working with sheet1 on wb 'workbook'
         sheet = wb['Form responses 3']
