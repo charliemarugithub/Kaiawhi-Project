@@ -156,6 +156,8 @@ def make_packing_list():
         # saving new worksheet to desktop with name packing_list
         wb.remove(sheet)
         wb.save('c:\\Users\\Charlie\\Desktop\\packing_list.xlsx')
+        packing_button.config(state=tk.DISABLED)
+        sheet_name_entry.delete(0, tk.END)
 
     except FileNotFoundError:
         file_not_found()
@@ -165,9 +167,6 @@ def make_packing_list():
 
     except ValueError:
         no_sheet_name()
-
-    packing_button.config(state=tk.DISABLED)
-    sheet_name_entry.delete(0, tk.END)
 
 
 def make_delivery_list():
@@ -284,6 +283,8 @@ def make_delivery_list():
         # saving new worksheet to desktop with name packing_list
         wb.remove(sheet)
         wb.save('c:\\Users\\Charlie\\Desktop\\delivery_list.xlsx')
+        delivery_button.config(state=tk.DISABLED)
+        sheet_name_entry.delete(0, tk.END)
 
     except FileNotFoundError:
         file_not_found()
@@ -293,9 +294,6 @@ def make_delivery_list():
 
     except ValueError:
         no_sheet_name()
-
-    delivery_button.config(state=tk.DISABLED)
-    sheet_name_entry.delete(0, tk.END)
 
 
 packing_button = ttk.Button(text='Packing List', command=make_packing_list)

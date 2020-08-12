@@ -15,11 +15,3 @@ def no_sheet_name():
 
 def report_generating():
     messagebox.showinfo("Report!", "Your Report Is Being Generated.")
-
-
-# def disable_packing_btn():
-# packing_button.config(state=DISABLED)
-
-
-# def disable_delivery_btn():
-# delivery_button.config(state=DISABLED)
