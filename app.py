@@ -38,20 +38,20 @@ main_form.create_window(250, 185, window=sheet_name_entry, width=220, height=25)
 
 def make_packing_list():
     # get method for filename entry
-    x1 = filename_entry.get()
+    get_file = filename_entry.get()
 
     try:
         # loading workbook on local computer c drive using filename
-        wb = xl.load_workbook(f'c:\\Users\\Charlie\\Desktop\\{x1.strip()}.xlsx')
+        wb = xl.load_workbook(f'c:\\Users\\Charlie\\Desktop\\{get_file.strip()}.xlsx')
 
         # working with sheet1 on wb 'workbook'
         sheet = wb['Form responses 3']
 
         # get method for new sheet name
-        x2 = sheet_name_entry.get()
+        sheet_name = sheet_name_entry.get()
         new_sheet = wb.create_sheet("Sheet A", 0)
-        new_sheet.title = x2
-        x2 = wb.active
+        new_sheet.title = sheet_name
+        sheet_name = wb.active
 
         # deleting columns so that columns required are left for new file
         sheet.delete_cols(1, 9)
@@ -70,6 +70,8 @@ def make_packing_list():
 
         # setting variables for loop
         bold_font = Font(name='Arial', size=12, bold=True)
+        # setting font for text in whole sheet except top row
+        cell_font = Font(name='Calibri', size=16)
         # cell alignment to center
         horizon_center = Alignment(horizontal='center')
         # wrap text alignment
@@ -102,8 +104,9 @@ def make_packing_list():
 
                 # writing the read value to destination excel file
                 new_sheet.cell(row=i, column=j).value = c.value
+                new_sheet.cell(row=i, column=j).font = cell_font
 
-                for row in x2.iter_rows(max_row=max_rows, max_col=max_columns):
+                for row in sheet_name.iter_rows(max_row=max_rows, max_col=max_columns):
                     for cell in row:
                         if cell.value == 'Panmure':
                             cell.fill = col_panmure
@@ -131,7 +134,7 @@ def make_packing_list():
                 # text alignment for all rows
                 new_sheet.cell(row=i, column=j).alignment = horizon_center
                 # setting all row height to 30
-                x2.row_dimensions[i].height = 30
+                sheet_name.row_dimensions[i].height = 30
                 # setting borders for all cells
                 new_sheet.cell(row=i, column=j).border = border
                 # wrapping text on columns 8-10
@@ -142,16 +145,16 @@ def make_packing_list():
                 new_sheet.cell(row=i, column=5).fill = totals_color
                 new_sheet.cell(row=i, column=5).font = bold_font
                 # setting specific column widths
-                x2.column_dimensions['A'].width = 20
-                x2.column_dimensions['B'].width = 30
-                x2.column_dimensions['C'].width = 25
-                x2.column_dimensions['D'].width = 25
-                x2.column_dimensions['E'].width = 9
-                x2.column_dimensions['F'].width = 10
-                x2.column_dimensions['G'].width = 10
-                x2.column_dimensions['H'].width = 45
-                x2.column_dimensions['I'].width = 45
-                x2.column_dimensions['J'].width = 45
+                sheet_name.column_dimensions['A'].width = 20
+                sheet_name.column_dimensions['B'].width = 30
+                sheet_name.column_dimensions['C'].width = 25
+                sheet_name.column_dimensions['D'].width = 25
+                sheet_name.column_dimensions['E'].width = 9
+                sheet_name.column_dimensions['F'].width = 10
+                sheet_name.column_dimensions['G'].width = 10
+                sheet_name.column_dimensions['H'].width = 45
+                sheet_name.column_dimensions['I'].width = 45
+                sheet_name.column_dimensions['J'].width = 45
 
         # saving new worksheet to desktop with name packing_list
         wb.remove(sheet)
@@ -171,19 +174,19 @@ def make_packing_list():
 
 def make_delivery_list():
     # get method for filename entry
-    x1 = filename_entry.get()
+    get_file = filename_entry.get()
     try:
         # loading workbook on local computer c drive using filename
-        wb = xl.load_workbook(f'c:\\Users\\Charlie\\Desktop\\{x1.strip()}.xlsx')
+        wb = xl.load_workbook(f'c:\\Users\\Charlie\\Desktop\\{get_file.strip()}.xlsx')
 
         # working with sheet1 on wb 'workbook'
         sheet = wb['Form responses 3']
 
         # get method for new sheet name
-        x2 = sheet_name_entry.get()
+        sheet_name = sheet_name_entry.get()
         new_sheet = wb.create_sheet("Sheet A", 0)
-        new_sheet.title = x2
-        x2 = wb.active
+        new_sheet.title = sheet_name
+        sheet_name = wb.active
 
         # deleting columns so that columns required are left for new file
         sheet.delete_cols(1, 7)
@@ -201,6 +204,8 @@ def make_delivery_list():
 
         # setting variables for loop
         bold_font = Font(name='Arial', size=12, bold=True)
+        # setting font for text in whole sheet except top row
+        cell_font = Font(name='Calibri', size=16)
         # cell alignment to center
         horizon_center = Alignment(horizontal='center')
         # wrap text alignment
@@ -232,8 +237,9 @@ def make_delivery_list():
 
                 # writing the read value to destination excel file
                 new_sheet.cell(row=i, column=j).value = c.value
+                new_sheet.cell(row=i, column=j).font = cell_font
 
-                for row in x2['A1:J100']:
+                for row in sheet_name.iter_rows(max_row=max_rows, max_col=max_columns):
                     for cell in row:
                         if cell.value == 'Panmure':
                             cell.fill = col_panmure
@@ -261,7 +267,7 @@ def make_delivery_list():
                 # text alignment for all rows
                 new_sheet.cell(row=i, column=j).alignment = horizon_center
                 # setting all row height to 30
-                x2.row_dimensions[i].height = 30
+                sheet_name.row_dimensions[i].height = 30
                 # setting borders for all cells
                 new_sheet.cell(row=i, column=j).border = border
                 # wrapping text on columns 7 & 9
@@ -271,15 +277,15 @@ def make_delivery_list():
                 new_sheet.cell(row=i, column=8).fill = totals_color
                 new_sheet.cell(row=i, column=8).font = bold_font
                 # setting specific column widths
-                x2.column_dimensions['A'].width = 18
-                x2.column_dimensions['B'].width = 18
-                x2.column_dimensions['C'].width = 20
-                x2.column_dimensions['D'].width = 30
-                x2.column_dimensions['E'].width = 25
-                x2.column_dimensions['F'].width = 25
-                x2.column_dimensions['G'].width = 45
-                x2.column_dimensions['H'].width = 12
-                x2.column_dimensions['I'].width = 45
+                sheet_name.column_dimensions['A'].width = 18
+                sheet_name.column_dimensions['B'].width = 18
+                sheet_name.column_dimensions['C'].width = 20
+                sheet_name.column_dimensions['D'].width = 30
+                sheet_name.column_dimensions['E'].width = 25
+                sheet_name.column_dimensions['F'].width = 25
+                sheet_name.column_dimensions['G'].width = 45
+                sheet_name.column_dimensions['H'].width = 12
+                sheet_name.column_dimensions['I'].width = 45
 
         # saving new worksheet to desktop with name packing_list
         wb.remove(sheet)
