@@ -103,7 +103,7 @@ def make_packing_list():
                 # writing the read value to destination excel file
                 new_sheet.cell(row=i, column=j).value = c.value
 
-                for row in x2['A1:J100']:
+                for row in x2.iter_rows(max_row=max_rows, max_col=max_columns):
                     for cell in row:
                         if cell.value == 'Panmure':
                             cell.fill = col_panmure
@@ -142,16 +142,16 @@ def make_packing_list():
                 new_sheet.cell(row=i, column=5).fill = totals_color
                 new_sheet.cell(row=i, column=5).font = bold_font
                 # setting specific column widths
-                x2.column_dimensions['A'].width = 21.5
-                x2.column_dimensions['B'].width = 35
-                x2.column_dimensions['C'].width = 27
+                x2.column_dimensions['A'].width = 20
+                x2.column_dimensions['B'].width = 30
+                x2.column_dimensions['C'].width = 25
                 x2.column_dimensions['D'].width = 25
                 x2.column_dimensions['E'].width = 9
-                x2.column_dimensions['F'].width = 12.5
-                x2.column_dimensions['G'].width = 9.8
-                x2.column_dimensions['H'].width = 75
-                x2.column_dimensions['I'].width = 75
-                x2.column_dimensions['J'].width = 75
+                x2.column_dimensions['F'].width = 10
+                x2.column_dimensions['G'].width = 10
+                x2.column_dimensions['H'].width = 45
+                x2.column_dimensions['I'].width = 45
+                x2.column_dimensions['J'].width = 45
 
         # saving new worksheet to desktop with name packing_list
         wb.remove(sheet)
@@ -191,7 +191,7 @@ def make_delivery_list():
 
         # updating Column Names
         sheet['A1'].value = "First Name"
-        sheet['C1'].value = "Address Number"
+        sheet['C1'].value = "Street Number"
         sheet['G1'].value = "Delivery Instructions"
         sheet['H1'].value = "Total"
 
@@ -264,21 +264,22 @@ def make_delivery_list():
                 x2.row_dimensions[i].height = 30
                 # setting borders for all cells
                 new_sheet.cell(row=i, column=j).border = border
-                # wrapping text on columns 9
+                # wrapping text on columns 7 & 9
+                new_sheet.cell(row=i, column=7).alignment = wrap_text
                 new_sheet.cell(row=i, column=9).alignment = wrap_text
                 # setting 'Totals' color column to red and bold font
                 new_sheet.cell(row=i, column=8).fill = totals_color
                 new_sheet.cell(row=i, column=8).font = bold_font
                 # setting specific column widths
                 x2.column_dimensions['A'].width = 18
-                x2.column_dimensions['B'].width = 28
-                x2.column_dimensions['C'].width = 35
-                x2.column_dimensions['D'].width = 35
-                x2.column_dimensions['E'].width = 30
+                x2.column_dimensions['B'].width = 18
+                x2.column_dimensions['C'].width = 20
+                x2.column_dimensions['D'].width = 30
+                x2.column_dimensions['E'].width = 25
                 x2.column_dimensions['F'].width = 25
-                x2.column_dimensions['G'].width = 60
+                x2.column_dimensions['G'].width = 45
                 x2.column_dimensions['H'].width = 12
-                x2.column_dimensions['I'].width = 75
+                x2.column_dimensions['I'].width = 45
 
         # saving new worksheet to desktop with name packing_list
         wb.remove(sheet)
