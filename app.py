@@ -68,8 +68,8 @@ def make_packing_list():
         max_rows = sheet.max_row
         max_columns = sheet.max_column
 
-        # setting variables for loop
-        bold_font = Font(name='Arial', size=12, bold=True)
+        # setting font for row 1
+        bold_font = Font(name='Arial', size=14, bold=True)
         # setting font for text in whole sheet except top row
         cell_font = Font(name='Calibri', size=16)
         # cell alignment to center
@@ -134,7 +134,7 @@ def make_packing_list():
                 # text alignment for all rows
                 new_sheet.cell(row=i, column=j).alignment = horizon_center
                 # setting all row height to 30
-                sheet_name.row_dimensions[i].height = 30
+                sheet_name.row_dimensions[i].height = 40
                 # setting borders for all cells
                 new_sheet.cell(row=i, column=j).border = border
                 # wrapping text on columns 8-10
@@ -150,7 +150,7 @@ def make_packing_list():
                 sheet_name.column_dimensions['C'].width = 25
                 sheet_name.column_dimensions['D'].width = 25
                 sheet_name.column_dimensions['E'].width = 9
-                sheet_name.column_dimensions['F'].width = 10
+                sheet_name.column_dimensions['F'].width = 13
                 sheet_name.column_dimensions['G'].width = 10
                 sheet_name.column_dimensions['H'].width = 45
                 sheet_name.column_dimensions['I'].width = 45
@@ -203,7 +203,7 @@ def make_delivery_list():
         max_columns = sheet.max_column
 
         # setting variables for loop
-        bold_font = Font(name='Arial', size=12, bold=True)
+        bold_font = Font(name='Arial', size=14, bold=True)
         # setting font for text in whole sheet except top row
         cell_font = Font(name='Calibri', size=16)
         # cell alignment to center
@@ -267,7 +267,7 @@ def make_delivery_list():
                 # text alignment for all rows
                 new_sheet.cell(row=i, column=j).alignment = horizon_center
                 # setting all row height to 30
-                sheet_name.row_dimensions[i].height = 30
+                sheet_name.row_dimensions[i].height = 40
                 # setting borders for all cells
                 new_sheet.cell(row=i, column=j).border = border
                 # wrapping text on columns 7 & 9
