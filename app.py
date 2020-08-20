@@ -60,6 +60,7 @@ def make_packing_list():
         for cell in sheet['D:D']:
             sheet.cell(row=cell.row, column=1, value=cell.value)
         sheet.delete_cols(4)
+        sheet.delete_cols(11)
 
         # updating Column Names
         sheet['E1'].value = "Total"
@@ -228,6 +229,7 @@ def make_delivery_list():
         for cell in sheet['F:F']:
             sheet.cell(row=cell.row, column=1, value=cell.value)
         sheet.delete_cols(6)
+        sheet.delete_cols(10)
 
         # updating Column Names
         sheet['B1'].value = "First Name"
