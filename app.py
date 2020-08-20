@@ -16,12 +16,12 @@ main_form.configure(background="#7289f2")
 root.title('Kaiawhi Program')
 
 # creating label for filename and placing it in root
-filename_label = tk.Label(root, text='Enter source file name: ', bg='#7289f2', font="Helvetica 16")
+filename_label = tk.Label(root, text='Enter source file path name: ', bg='#7289f2', font="Helvetica 16")
 main_form.create_window(250, 40, window=filename_label)
 
 # creating entry for filename and placing it in root
 filename_entry = tk.Entry(root, font="Helvetica, 16")
-main_form.create_window(250, 80, window=filename_entry, width=220, height=25)
+main_form.create_window(250, 80, window=filename_entry, width=350, height=25)
 
 # creating label for sheet name and placing it in root
 sheet_name_label = tk.Label(root, text='Enter new sheet name:', bg='#7289f2', font="Helvetica 16")
@@ -33,7 +33,7 @@ main_form.create_window(250, 150, window=sheet_name_example_label)
 
 # creating entry for sheet name and placing it in root
 sheet_name_entry = tk.Entry(root, font="Helvetica, 16")
-main_form.create_window(250, 185, window=sheet_name_entry, width=220, height=25)
+main_form.create_window(250, 185, window=sheet_name_entry, width=300, height=25)
 
 
 def make_packing_list():
@@ -42,7 +42,7 @@ def make_packing_list():
 
     try:
         # loading workbook on local computer c drive using filename
-        wb = xl.load_workbook(f'c:\\Users\\Charlie\\Desktop\\{get_file.strip()}.xlsx')
+        wb = xl.load_workbook(f'{get_file.strip()}.xlsx')
 
         # working with sheet1 on wb 'workbook'
         sheet = wb['Form responses 3']
