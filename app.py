@@ -56,6 +56,10 @@ def make_packing_list():
         # deleting columns so that columns required are left for new file
         sheet.delete_cols(1, 9)
         sheet.delete_cols(5)
+        sheet.insert_cols(1)
+        for cell in sheet['D:D']:
+            sheet.cell(row=cell.row, column=1, value=cell.value)
+        sheet.delete_cols(4)
 
         # updating Column Names
         sheet['E1'].value = "Total"
@@ -184,6 +188,7 @@ def make_packing_list():
                 sheet_name.column_dimensions['I'].width = 45
                 sheet_name.column_dimensions['J'].width = 45
 
+        # sheet_name.auto_filter.add_sort_condition('C2')
         # saving new worksheet to desktop with name packing_list
         wb.remove(sheet)
         wb.save('c:\\Users\\Charlie\\Desktop\\packing_list.xlsx')
@@ -219,10 +224,13 @@ def make_delivery_list():
         # deleting columns so that columns required are left for new file
         sheet.delete_cols(1, 7)
         sheet.delete_cols(9, 4)
+        sheet.insert_cols(1)
+        for cell in sheet['F:F']:
+            sheet.cell(row=cell.row, column=1, value=cell.value)
+        sheet.delete_cols(6)
 
         # updating Column Names
-        sheet['A1'].value = "First Name"
-        sheet['C1'].value = "Street Number"
+        sheet['B1'].value = "First Name"
         sheet['G1'].value = "Delivery Instructions"
         sheet['H1'].value = "Total"
 
