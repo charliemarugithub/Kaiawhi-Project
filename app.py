@@ -281,8 +281,19 @@ def make_delivery_list():
         col_greenlane = PatternFill(fgColor='f0daa1', fill_type='solid')
         col_mangere = PatternFill(fgColor='e4f0a1', fill_type='solid')
         col_pakuranga = PatternFill(fgColor='e4e86d', fill_type='solid')
+        col_clendon = PatternFill(fgColor='edc0b4', fill_type='solid')
+        col_henderson = PatternFill(fgColor='eddcb4', fill_type='solid')
+        col_howick = PatternFill(fgColor='dbedb4', fill_type='solid')
+        col_karaka = PatternFill(fgColor='84b07f', fill_type='solid')
+        col_manukau = PatternFill(fgColor='7fb099', fill_type='solid')
+        col_manurewa = PatternFill(fgColor='98edc5', fill_type='solid')
+        col_meadowbank = PatternFill(fgColor='77d1c8', fill_type='solid')
+        col_onehunga = PatternFill(fgColor='87d0ed', fill_type='solid')
+        col_otahuhu = PatternFill(fgColor='bebdf2', fill_type='solid')
+        col_waiotaiki = PatternFill(fgColor='9292a6', fill_type='solid')
+        col_wattle = PatternFill(fgColor='cebad6', fill_type='solid')
         # setting color for 'Total' column
-        totals_color = PatternFill(fgColor='fac2b4', fill_type='solid')
+        # totals_color = PatternFill(fgColor='fac2b4', fill_type='solid')
 
         # copying the cell values from source excel file to destination excel file
         for i in range(1, max_rows + 1):
@@ -298,24 +309,64 @@ def make_delivery_list():
                     for cell in row:
                         if cell.value == 'Panmure':
                             cell.fill = col_panmure
-                        if cell.value == 'Pt England':
-                            cell.fill = col_ptengland
+                            new_sheet.cell(row=i, column=8).fill = col_panmure
+                        if cell.value == 'Clendon Park':
+                            cell.fill = col_clendon
+                            new_sheet.cell(row=i, column=8).fill = col_clendon
                         if cell.value == 'Point England':
                             cell.fill = col_ptengland
+                            new_sheet.cell(row=i, column=8).fill = col_ptengland
                         if cell.value == 'Glen Innes':
                             cell.fill = col_gi
+                            new_sheet.cell(row=i, column=8).fill = col_gi
                         if cell.value == 'St Johns':
                             cell.fill = col_stjohns
+                            new_sheet.cell(row=i, column=8).fill = col_stjohns
                         if cell.value == 'Glendowie':
                             cell.fill = col_glendowie
+                            new_sheet.cell(row=i, column=8).fill = col_glendowie
                         if cell.value == 'Mt Wellington':
                             cell.fill = col_mtwell
+                            new_sheet.cell(row=i, column=8).fill = col_mtwell
                         if cell.value == 'Greenlane':
                             cell.fill = col_greenlane
+                            new_sheet.cell(row=i, column=8).fill = col_greenlane
                         if cell.value == 'Mangere':
                             cell.fill = col_mangere
+                            new_sheet.cell(row=i, column=8).fill = col_mangere
                         if cell.value == 'Pakuranga':
                             cell.fill = col_pakuranga
+                            new_sheet.cell(row=i, column=8).fill = col_pakuranga
+                        if cell.value == 'Henderson':
+                            cell.fill = col_henderson
+                            new_sheet.cell(row=i, column=8).fill = col_henderson
+                        if cell.value == 'Howick':
+                            cell.fill = col_howick
+                            new_sheet.cell(row=i, column=8).fill = col_howick
+                        if cell.value == 'Karaka':
+                            cell.fill = col_karaka
+                            new_sheet.cell(row=i, column=8).fill = col_karaka
+                        if cell.value == 'Manukau':
+                            cell.fill = col_manukau
+                            new_sheet.cell(row=i, column=8).fill = col_manukau
+                        if cell.value == 'Manurewa':
+                            cell.fill = col_manurewa
+                            new_sheet.cell(row=i, column=8).fill = col_manurewa
+                        if cell.value == 'Meadowbank':
+                            cell.fill = col_meadowbank
+                            new_sheet.cell(row=i, column=8).fill = col_meadowbank
+                        if cell.value == 'Onehunga':
+                            cell.fill = col_meadowbank
+                            new_sheet.cell(row=i, column=8).fill = col_onehunga
+                        if cell.value == 'Otahuhu':
+                            cell.fill = col_otahuhu
+                            new_sheet.cell(row=i, column=8).fill = col_otahuhu
+                        if cell.value == 'Waiotaiki Bay':
+                            cell.fill = col_waiotaiki
+                            new_sheet.cell(row=i, column=8).fill = col_waiotaiki
+                        if cell.value == 'Wattle Downs':
+                            cell.fill = col_wattle
+                            new_sheet.cell(row=i, column=8).fill = col_wattle
 
                 # making row 1 bold font
                 new_sheet.cell(row=1, column=i).font = bold_font
@@ -329,7 +380,7 @@ def make_delivery_list():
                 new_sheet.cell(row=i, column=7).alignment = wrap_text
                 new_sheet.cell(row=i, column=9).alignment = wrap_text
                 # setting 'Totals' color column to red and bold font
-                new_sheet.cell(row=i, column=8).fill = totals_color
+                # new_sheet.cell(row=i, column=8).fill = totals_color
                 new_sheet.cell(row=i, column=8).font = bold_font
                 # setting specific column widths
                 sheet_name.column_dimensions['A'].width = 18
