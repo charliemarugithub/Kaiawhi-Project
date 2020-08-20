@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import ttk
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.styles.borders import BORDER_THICK
-from functions import file_not_found, no_filename, no_sheet_name
+from functions import file_not_found, no_filename, no_sheet_name, permission_error
 from openpyxl.utils.exceptions import InvalidFileException
 
 # creating instance of TK class
@@ -104,99 +104,74 @@ def make_packing_list():
         col_otahuhu = PatternFill(fgColor='bebdf2', fill_type='solid')
         col_waiotaiki = PatternFill(fgColor='9292a6', fill_type='solid')
         col_wattle = PatternFill(fgColor='cebad6', fill_type='solid')
-        # setting color for 'Total' column
-        # totals_color = PatternFill(fgColor='fac2b4', fill_type='solid')
 
-        # counter for number of times the suburb is selected
-        counter_panmure = 0
         # copying the cell values from source excel file to destination excel file
-        for i in range(1, max_rows + 1):
-            for j in range(1, max_columns + 1):
+        for i in range(1, max_rows):
+            for j in range(1, max_columns):
                 # reading cell value from source excel file
                 c = sheet.cell(row=i, column=j)
 
                 # writing the read value to destination excel file
-                new_sheet.cell(row=i, column=j).value = c.value
-                new_sheet.cell(row=i, column=j).font = cell_font
+                sheet_name.cell(row=i, column=j).value = c.value
+                sheet_name.cell(row=i, column=j).font = cell_font
 
                 for row in sheet_name.iter_rows(max_row=max_rows, max_col=max_columns):
                     for cell in row:
                         if cell.value == 'Panmure':
-                            cell.fill = col_panmure
-                            new_sheet.cell(row=i, column=5).fill = col_panmure
+                            sheet_name.cell(row=i, column=j).fill = col_panmure
                         if cell.value == 'Clendon Park':
-                            cell.fill = col_clendon
-                            new_sheet.cell(row=i, column=5).fill = col_clendon
+                            sheet_name.cell(row=i, column=j).fill = col_clendon
                         if cell.value == 'Point England':
-                            cell.fill = col_ptengland
-                            new_sheet.cell(row=i, column=5).fill = col_ptengland
+                            sheet_name.cell(row=i, column=j).fill = col_ptengland
                         if cell.value == 'Glen Innes':
-                            cell.fill = col_gi
-                            new_sheet.cell(row=i, column=5).fill = col_gi
+                            sheet_name.cell(row=i, column=j).fill = col_gi
                         if cell.value == 'St Johns':
-                            cell.fill = col_stjohns
-                            new_sheet.cell(row=i, column=5).fill = col_stjohns
+                            sheet_name.cell(row=i, column=j).fill = col_stjohns
                         if cell.value == 'Glendowie':
-                            cell.fill = col_glendowie
-                            new_sheet.cell(row=i, column=5).fill = col_glendowie
+                            sheet_name.cell(row=i, column=j).fill = col_glendowie
                         if cell.value == 'Mt Wellington':
-                            cell.fill = col_mtwell
-                            new_sheet.cell(row=i, column=5).fill = col_mtwell
+                            sheet_name.cell(row=i, column=j).fill = col_mtwell
                         if cell.value == 'Greenlane':
-                            cell.fill = col_greenlane
-                            new_sheet.cell(row=i, column=5).fill = col_greenlane
+                            sheet_name.cell(row=i, column=j).fill = col_greenlane
                         if cell.value == 'Mangere':
-                            cell.fill = col_mangere
-                            new_sheet.cell(row=i, column=5).fill = col_mangere
+                            sheet_name.cell(row=i, column=j).fill = col_mangere
                         if cell.value == 'Pakuranga':
-                            cell.fill = col_pakuranga
-                            new_sheet.cell(row=i, column=5).fill = col_pakuranga
+                            sheet_name.cell(row=i, column=j).fill = col_pakuranga
                         if cell.value == 'Henderson':
-                            cell.fill = col_henderson
-                            new_sheet.cell(row=i, column=5).fill = col_henderson
+                            sheet_name.cell(row=i, column=j).fill = col_henderson
                         if cell.value == 'Howick':
-                            cell.fill = col_howick
-                            new_sheet.cell(row=i, column=5).fill = col_howick
+                            sheet_name.cell(row=i, column=j).fill = col_howick
                         if cell.value == 'Karaka':
-                            cell.fill = col_karaka
-                            new_sheet.cell(row=i, column=5).fill = col_karaka
+                            sheet_name.cell(row=i, column=j).fill = col_karaka
                         if cell.value == 'Manukau':
-                            cell.fill = col_manukau
-                            new_sheet.cell(row=i, column=5).fill = col_manukau
+                            sheet_name.cell(row=i, column=j).fill = col_manukau
                         if cell.value == 'Manurewa':
-                            cell.fill = col_manurewa
-                            new_sheet.cell(row=i, column=5).fill = col_manurewa
+                            sheet_name.cell(row=i, column=j).fill = col_manurewa
                         if cell.value == 'Meadowbank':
-                            cell.fill = col_meadowbank
-                            new_sheet.cell(row=i, column=5).fill = col_meadowbank
+                            sheet_name.cell(row=i, column=j).fill = col_meadowbank
                         if cell.value == 'Onehunga':
-                            cell.fill = col_meadowbank
-                            new_sheet.cell(row=i, column=5).fill = col_onehunga
+                            sheet_name.cell(row=i, column=j).fill = col_onehunga
                         if cell.value == 'Otahuhu':
-                            cell.fill = col_otahuhu
-                            new_sheet.cell(row=i, column=5).fill = col_otahuhu
+                            sheet_name.cell(row=i, column=j).fill = col_otahuhu
                         if cell.value == 'Waiotaiki Bay':
-                            cell.fill = col_waiotaiki
-                            new_sheet.cell(row=i, column=5).fill = col_waiotaiki
+                            sheet_name.cell(row=i, column=j).fill = col_waiotaiki
                         if cell.value == 'Wattle Downs':
-                            cell.fill = col_wattle
-                            new_sheet.cell(row=i, column=5).fill = col_wattle
+                            sheet_name.cell(row=i, column=j).fill = col_wattle
 
                 # making row 1 bold font
-                new_sheet.cell(row=1, column=i).font = bold_font
+                sheet_name.cell(row=1, column=i).font = bold_font
                 # text alignment for all rows
-                new_sheet.cell(row=i, column=j).alignment = horizon_center
+                sheet_name.cell(row=i, column=j).alignment = horizon_center
                 # setting all row height to 30
                 sheet_name.row_dimensions[i].height = 40
                 # setting borders for all cells
-                new_sheet.cell(row=i, column=j).border = border
+                sheet_name.cell(row=i, column=j).border = border
                 # wrapping text on columns 8-10
-                new_sheet.cell(row=i, column=8).alignment = wrap_text
-                new_sheet.cell(row=i, column=9).alignment = wrap_text
-                new_sheet.cell(row=i, column=10).alignment = wrap_text
-                # setting 'Totals' color column to red and bold font
-                # new_sheet.cell(row=i, column=5).fill = totals_color
-                new_sheet.cell(row=i, column=5).font = bold_font
+                sheet_name.cell(row=i, column=8).alignment = wrap_text
+                sheet_name.cell(row=i, column=9).alignment = wrap_text
+                sheet_name.cell(row=i, column=10).alignment = wrap_text
+                # Totals column made bold
+                sheet_name.cell(row=i, column=5).font = bold_font
                 # setting specific column widths
                 sheet_name.column_dimensions['A'].width = 20
                 sheet_name.column_dimensions['B'].width = 30
@@ -224,15 +199,13 @@ def make_packing_list():
     except ValueError:
         no_sheet_name()
 
-        print(counter_panmure)
-
 
 def make_delivery_list():
     # get method for filename entry
     get_file = filename_entry.get()
     try:
         # loading workbook on local computer c drive using filename
-        wb = xl.load_workbook(f'c:\\Users\\Charlie\\Desktop\\{get_file.strip()}.xlsx')
+        wb = xl.load_workbook(f'{get_file.strip()}.xlsx')
 
         # working with sheet1 on wb 'workbook'
         sheet = wb['Form responses 3']
@@ -292,96 +265,73 @@ def make_delivery_list():
         col_otahuhu = PatternFill(fgColor='bebdf2', fill_type='solid')
         col_waiotaiki = PatternFill(fgColor='9292a6', fill_type='solid')
         col_wattle = PatternFill(fgColor='cebad6', fill_type='solid')
-        # setting color for 'Total' column
-        # totals_color = PatternFill(fgColor='fac2b4', fill_type='solid')
 
         # copying the cell values from source excel file to destination excel file
-        for i in range(1, max_rows + 1):
-            for j in range(1, max_columns + 1):
+        for i in range(1, max_rows):
+            for j in range(1, max_columns):
                 # reading cell value from source excel file
                 c = sheet.cell(row=i, column=j)
 
                 # writing the read value to destination excel file
-                new_sheet.cell(row=i, column=j).value = c.value
-                new_sheet.cell(row=i, column=j).font = cell_font
+                sheet_name.cell(row=i, column=j).value = c.value
+                sheet_name.cell(row=i, column=j).font = cell_font
 
                 for row in sheet_name.iter_rows(max_row=max_rows, max_col=max_columns):
                     for cell in row:
                         if cell.value == 'Panmure':
-                            cell.fill = col_panmure
-                            new_sheet.cell(row=i, column=8).fill = col_panmure
+                            sheet_name.cell(row=i, column=j).fill = col_panmure
                         if cell.value == 'Clendon Park':
-                            cell.fill = col_clendon
-                            new_sheet.cell(row=i, column=8).fill = col_clendon
+                            sheet_name.cell(row=i, column=j).fill = col_clendon
                         if cell.value == 'Point England':
-                            cell.fill = col_ptengland
-                            new_sheet.cell(row=i, column=8).fill = col_ptengland
+                            sheet_name.cell(row=i, column=j).fill = col_ptengland
                         if cell.value == 'Glen Innes':
-                            cell.fill = col_gi
-                            new_sheet.cell(row=i, column=8).fill = col_gi
+                            sheet_name.cell(row=i, column=j).fill = col_gi
                         if cell.value == 'St Johns':
-                            cell.fill = col_stjohns
-                            new_sheet.cell(row=i, column=8).fill = col_stjohns
+                            sheet_name.cell(row=i, column=j).fill = col_stjohns
                         if cell.value == 'Glendowie':
-                            cell.fill = col_glendowie
-                            new_sheet.cell(row=i, column=8).fill = col_glendowie
+                            sheet_name.cell(row=i, column=j).fill = col_glendowie
                         if cell.value == 'Mt Wellington':
-                            cell.fill = col_mtwell
-                            new_sheet.cell(row=i, column=8).fill = col_mtwell
+                            sheet_name.cell(row=i, column=j).fill = col_mtwell
                         if cell.value == 'Greenlane':
-                            cell.fill = col_greenlane
-                            new_sheet.cell(row=i, column=8).fill = col_greenlane
+                            sheet_name.cell(row=i, column=j).fill = col_greenlane
                         if cell.value == 'Mangere':
-                            cell.fill = col_mangere
-                            new_sheet.cell(row=i, column=8).fill = col_mangere
+                            sheet_name.cell(row=i, column=j).fill = col_mangere
                         if cell.value == 'Pakuranga':
-                            cell.fill = col_pakuranga
-                            new_sheet.cell(row=i, column=8).fill = col_pakuranga
+                            sheet_name.cell(row=i, column=j).fill = col_pakuranga
                         if cell.value == 'Henderson':
-                            cell.fill = col_henderson
-                            new_sheet.cell(row=i, column=8).fill = col_henderson
+                            sheet_name.cell(row=i, column=j).fill = col_henderson
                         if cell.value == 'Howick':
-                            cell.fill = col_howick
-                            new_sheet.cell(row=i, column=8).fill = col_howick
+                            sheet_name.cell(row=i, column=j).fill = col_howick
                         if cell.value == 'Karaka':
-                            cell.fill = col_karaka
-                            new_sheet.cell(row=i, column=8).fill = col_karaka
+                            sheet_name.cell(row=i, column=j).fill = col_karaka
                         if cell.value == 'Manukau':
-                            cell.fill = col_manukau
-                            new_sheet.cell(row=i, column=8).fill = col_manukau
+                            sheet_name.cell(row=i, column=j).fill = col_manukau
                         if cell.value == 'Manurewa':
-                            cell.fill = col_manurewa
-                            new_sheet.cell(row=i, column=8).fill = col_manurewa
+                            sheet_name.cell(row=i, column=j).fill = col_manurewa
                         if cell.value == 'Meadowbank':
-                            cell.fill = col_meadowbank
-                            new_sheet.cell(row=i, column=8).fill = col_meadowbank
+                            sheet_name.cell(row=i, column=j).fill = col_meadowbank
                         if cell.value == 'Onehunga':
-                            cell.fill = col_meadowbank
-                            new_sheet.cell(row=i, column=8).fill = col_onehunga
+                            sheet_name.cell(row=i, column=j).fill = col_onehunga
                         if cell.value == 'Otahuhu':
-                            cell.fill = col_otahuhu
-                            new_sheet.cell(row=i, column=8).fill = col_otahuhu
+                            sheet_name.cell(row=i, column=j).fill = col_otahuhu
                         if cell.value == 'Waiotaiki Bay':
-                            cell.fill = col_waiotaiki
-                            new_sheet.cell(row=i, column=8).fill = col_waiotaiki
+                            sheet_name.cell(row=i, column=j).fill = col_waiotaiki
                         if cell.value == 'Wattle Downs':
-                            cell.fill = col_wattle
-                            new_sheet.cell(row=i, column=8).fill = col_wattle
+                            sheet_name.cell(row=i, column=j).fill = col_wattle
 
                 # making row 1 bold font
-                new_sheet.cell(row=1, column=i).font = bold_font
+                sheet_name.cell(row=1, column=i).font = bold_font
                 # text alignment for all rows
-                new_sheet.cell(row=i, column=j).alignment = horizon_center
+                sheet_name.cell(row=i, column=j).alignment = horizon_center
                 # setting all row height to 30
                 sheet_name.row_dimensions[i].height = 40
                 # setting borders for all cells
-                new_sheet.cell(row=i, column=j).border = border
+                sheet_name.cell(row=i, column=j).border = border
                 # wrapping text on columns 7 & 9
-                new_sheet.cell(row=i, column=7).alignment = wrap_text
-                new_sheet.cell(row=i, column=9).alignment = wrap_text
-                # setting 'Totals' color column to red and bold font
-                # new_sheet.cell(row=i, column=8).fill = totals_color
-                new_sheet.cell(row=i, column=8).font = bold_font
+                sheet_name.cell(row=i, column=7).alignment = wrap_text
+                sheet_name.cell(row=i, column=9).alignment = wrap_text
+                # Totals column made bold
+                sheet_name.cell(row=i, column=8).font = bold_font
                 # setting specific column widths
                 sheet_name.column_dimensions['A'].width = 18
                 sheet_name.column_dimensions['B'].width = 18
@@ -407,6 +357,9 @@ def make_delivery_list():
 
     except ValueError:
         no_sheet_name()
+
+    except PermissionError:
+        permission_error()
 
 
 packing_button = ttk.Button(text='Packing List', command=make_packing_list)

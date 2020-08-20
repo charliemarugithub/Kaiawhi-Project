@@ -1,4 +1,4 @@
-from tkinter import messagebox, DISABLED
+from tkinter import messagebox
 
 
 def file_not_found():
@@ -10,8 +10,12 @@ def no_filename():
 
 
 def no_sheet_name():
-    messagebox.showinfo("No Sheet Name Listed!", "You Must Enter Sheet Name.")
+    messagebox.showinfo("No Sheet Name Listed!", "You Must Enter A Sheet Name.")
 
 
 def report_generating():
     messagebox.showinfo("Report!", "Your Report Is Being Generated.")
+
+
+def permission_error():
+    messagebox.showinfo("This file is open somewhere, please close it and start again!")
