@@ -15,7 +15,3 @@ def no_sheet_name():
 
 def report_generating():
     messagebox.showinfo("Report!", "Your Report Is Being Generated.")
-
-
-def permission_error():
-    messagebox.showinfo("This file is open somewhere, please close it and start again!")

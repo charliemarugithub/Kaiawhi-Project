@@ -3,8 +3,9 @@ import tkinter as tk
 from tkinter import ttk
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.styles.borders import BORDER_THICK
-from functions import file_not_found, no_filename, no_sheet_name, permission_error
+from functions import file_not_found, no_filename, no_sheet_name
 from openpyxl.utils.exceptions import InvalidFileException
+from collections import defaultdict
 
 # creating instance of TK class
 root = tk.Tk()
@@ -61,7 +62,6 @@ def make_packing_list():
             sheet.cell(row=cell.row, column=1, value=cell.value)
         sheet.delete_cols(4)
         sheet.delete_cols(11)
-
         # updating Column Names
         sheet['E1'].value = "Total"
         sheet['F1'].value = "Children"
@@ -119,6 +119,7 @@ def make_packing_list():
                 # writing the read value to destination excel file
                 sheet_name.cell(row=i, column=j).value = c.value
                 sheet_name.cell(row=i, column=j).font = cell_font
+                # creating dictionary of Suburb and Totals
 
                 for row in sheet_name.iter_rows(max_row=max_rows, max_col=max_columns):
                     for cell in row:
@@ -192,6 +193,41 @@ def make_packing_list():
         # sheet_name.auto_filter.add_sort_condition('C2')
         # saving new worksheet to desktop with name packing_list
         wb.remove(sheet)
+        # create 2nd sheet to copy over suburb and totals
+        box_name = 'Boxes'
+        box_sheet = wb.create_sheet("Sheet B", 1)
+        box_sheet.title = box_name
+        box_name = wb.active
+
+        # creating 2 lists to take suburbs and totals
+        suburbs_list = []
+        totals_list = []
+
+        # creating dictionary to collect 2 lists above
+        sub_and_totals = defaultdict(list)
+
+        # iterating over suburbs and appending to suburbs list
+        for cell in sheet['A:A']:
+            box_sheet.cell(row=cell.row, column=1, value=cell.value)
+            suburbs_list.append(cell.value)
+        # iterating over totals and appending to suburbs list
+        for cell in sheet['E:E']:
+            box_sheet.cell(row=cell.row, column=2, value=cell.value)
+            totals_list.append(cell.value)
+
+        # removing row 1 as not needed for dictionary
+        box_sheet.delete_rows(1)
+
+        print(len(suburbs_list))
+        print(len(totals_list))
+
+        # iterating over both lists to append to dictionary without duplicate
+        # key values and appending values that belong to the same key
+        for i, j in zip(suburbs_list, totals_list):
+            sub_and_totals[i].append(j)
+
+        print(sub_and_totals)
+
         wb.save('c:\\Users\\Charlie\\Desktop\\packing_list.xlsx')
         packing_button.config(state=tk.DISABLED)
         sheet_name_entry.delete(0, tk.END)
@@ -367,9 +403,6 @@ def make_delivery_list():
 
     except ValueError:
         no_sheet_name()
-
-    except PermissionError:
-        permission_error()
 
 
 packing_button = ttk.Button(text='Packing List', command=make_packing_list)
