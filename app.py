@@ -5,7 +5,7 @@ from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.styles.borders import BORDER_THICK
 from functions import file_not_found, no_filename, no_sheet_name
 from openpyxl.utils.exceptions import InvalidFileException
-from collections import defaultdict
+from collections import defaultdict, Counter
 
 # creating instance of TK class
 root = tk.Tk()
@@ -218,15 +218,34 @@ def make_packing_list():
         # removing row 1 as not needed for dictionary
         box_sheet.delete_rows(1)
 
-        print(len(suburbs_list))
-        print(len(totals_list))
-
         # iterating over both lists to append to dictionary without duplicate
-        # key values and appending values that belong to the same key
+        # keys (zip)  and appending values that belong to the same key
         for i, j in zip(suburbs_list, totals_list):
             sub_and_totals[i].append(j)
 
+        del sub_and_totals['Suburb']
+
         print(sub_and_totals)
+        dict_values = sub_and_totals.values()
+
+        for counter in dict_values:
+            frequency = Counter(counter)
+            print(frequency)
+
+        # creating another dictionary to count values frequency
+        # this counts keys, not values
+        frequency = {}
+        for item in sub_and_totals:
+            if item in frequency:
+                frequency[item] += 1
+            else:
+                frequency[item] = 1
+
+        print(frequency)
+
+        for i in sub_and_totals.keys():
+            for j in sub_and_totals.values():
+                print(dict{i:j})
 
         wb.save('c:\\Users\\Charlie\\Desktop\\packing_list.xlsx')
         packing_button.config(state=tk.DISABLED)
