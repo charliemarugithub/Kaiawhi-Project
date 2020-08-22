@@ -77,10 +77,13 @@ def make_packing_list():
         sheet.delete_cols(1, 9)
         sheet.delete_cols(5)
         sheet.insert_cols(1)
+        # moving suburbs to column 1. This is required to make suburb color work
         for cell in sheet['D:D']:
             sheet.cell(row=cell.row, column=1, value=cell.value)
+        # deleting old suburb columns now as not required
         sheet.delete_cols(4)
-        sheet.delete_cols(11)
+        sheet.delete_cols(11, 6)
+
         # updating Column Names
         sheet['E1'].value = "Total"
         sheet['F1'].value = "Children"
