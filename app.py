@@ -169,7 +169,7 @@ def make_packing_list():
                 # text alignment for all rows
                 sheet_name.cell(row=i, column=j).alignment = horizon_center
                 # setting all row height to 30
-                sheet_name.row_dimensions[i].height = 40
+                sheet_name.row_dimensions[i].height = 45
                 # setting borders for all cells
                 sheet_name.cell(row=i, column=j).border = border
                 # wrapping text on columns 8-10
@@ -190,8 +190,6 @@ def make_packing_list():
                 sheet_name.column_dimensions['I'].width = 45
                 sheet_name.column_dimensions['J'].width = 45
 
-        # sheet_name.auto_filter.add_sort_condition('C2')
-        # saving new worksheet to desktop with name packing_list
         wb.remove(sheet)
         # create 2nd sheet to copy over suburb and totals
         box_name = 'Boxes'
@@ -208,10 +206,12 @@ def make_packing_list():
 
         # iterating over suburbs and appending to suburbs list
         for cell in sheet['A:A']:
+            # writing values to new sheet
             box_sheet.cell(row=cell.row, column=1, value=cell.value)
             suburbs_list.append(cell.value)
-        # iterating over totals and appending to suburbs list
+        # iterating over totals and appending to totals list
         for cell in sheet['E:E']:
+            # writing values to new sheet
             box_sheet.cell(row=cell.row, column=2, value=cell.value)
             totals_list.append(cell.value)
 
@@ -226,14 +226,19 @@ def make_packing_list():
         del sub_and_totals['Suburb']
 
         print(sub_and_totals)
+        # creating variable dict_tables to take dict values
         dict_values = sub_and_totals.values()
-
+        # counting how often duplicates values are in this dict
         for counter in dict_values:
             frequency = Counter(counter)
             print(frequency)
 
-        # creating another dictionary to count values frequency
-        # this counts keys, not values
+
+        '''
+        # creating another dictionary to count keys frequency
+        # this counts keys only, not values
+        # Do I need this right now? No, comment out for now
+
         frequency = {}
         for item in sub_and_totals:
             if item in frequency:
@@ -242,11 +247,9 @@ def make_packing_list():
                 frequency[item] = 1
 
         print(frequency)
+        '''
 
-        for i in sub_and_totals.keys():
-            for j in sub_and_totals.values():
-                print(dict{i:j})
-
+        # saving new worksheet to desktop with name packing_list
         wb.save('c:\\Users\\Charlie\\Desktop\\packing_list.xlsx')
         packing_button.config(state=tk.DISABLED)
         sheet_name_entry.delete(0, tk.END)
@@ -389,7 +392,7 @@ def make_delivery_list():
                 # text alignment for all rows
                 sheet_name.cell(row=i, column=j).alignment = horizon_center
                 # setting all row height to 30
-                sheet_name.row_dimensions[i].height = 40
+                sheet_name.row_dimensions[i].height = 65
                 # setting borders for all cells
                 sheet_name.cell(row=i, column=j).border = border
                 # wrapping text on columns 7 & 9
