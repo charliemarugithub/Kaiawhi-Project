@@ -13,7 +13,9 @@ def no_sheet_name():
     messagebox.showinfo("No Sheet Name Listed!", "You Must Enter A Sheet Name.")
 
 
-def report_generating():
-    messagebox.showinfo("Report!", "Your Report Is Being Generated.")
+def packing_report_generated():
+    messagebox.showinfo("Report!", "Packing List Now Completed.")
 
 
+def delivery_report_generated():
+    messagebox.showinfo("Report!", "Delivery List Now Completed.")

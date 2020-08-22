@@ -3,14 +3,14 @@ import tkinter as tk
 from tkinter import ttk
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.styles.borders import BORDER_THICK
-from functions import file_not_found, no_filename, no_sheet_name
+from functions import file_not_found, no_filename, no_sheet_name, packing_report_generated, delivery_report_generated
 from openpyxl.utils.exceptions import InvalidFileException
 from collections import defaultdict, Counter
 
 # creating instance of TK class
 root = tk.Tk()
 # creating main form window and packing it
-main_form = tk.Canvas(root, width=500, height=400)
+main_form = tk.Canvas(root, width=500, height=500)
 main_form.pack()
 main_form.configure(background="#7289f2")
 # name root title page
@@ -34,7 +34,17 @@ main_form.create_window(250, 150, window=sheet_name_example_label)
 
 # creating entry for sheet name and placing it in root
 sheet_name_entry = tk.Entry(root, font="Helvetica, 16")
-main_form.create_window(250, 185, window=sheet_name_entry, width=300, height=25)
+main_form.create_window(250, 190, window=sheet_name_entry, width=350, height=25)
+
+'''
+# creating entry for destination file
+destination_label = tk.Label(root, text='Enter Destination file path name: ', bg='#7289f2', font="Helvetica 16")
+main_form.create_window(250, 230, window=destination_label)
+
+# creating entry for filename destination $ placing it in root
+destination_entry = tk.Entry(root, font="Helvetica, 16")
+main_form.create_window(250, 280, window=destination_entry, width=350, height=25)
+'''
 
 
 def make_packing_list():
@@ -253,6 +263,7 @@ def make_packing_list():
         wb.save('c:\\Users\\Charlie\\Desktop\\packing_list.xlsx')
         packing_button.config(state=tk.DISABLED)
         sheet_name_entry.delete(0, tk.END)
+        packing_report_generated()
 
     except FileNotFoundError:
         file_not_found()
@@ -415,7 +426,7 @@ def make_delivery_list():
         wb.remove(sheet)
         wb.save('c:\\Users\\Charlie\\Desktop\\delivery_list.xlsx')
         delivery_button.config(state=tk.DISABLED)
-        sheet_name_entry.delete(0, tk.END)
+        delivery_report_generated()
 
     except FileNotFoundError:
         file_not_found()
@@ -427,10 +438,20 @@ def make_delivery_list():
         no_sheet_name()
 
 
+def clear_all():
+    delivery_button.config(state=tk.ACTIVE)
+    packing_button.config(state=tk.ACTIVE)
+    sheet_name_entry.delete(0, tk.END)
+    filename_entry.delete(0, tk.END)
+
+
 packing_button = ttk.Button(text='Packing List', command=make_packing_list)
-main_form.create_window(150, 260, window=packing_button, height=50, width=150)
+main_form.create_window(150, 360, window=packing_button, height=50, width=150)
 
 delivery_button = ttk.Button(text='Delivery List', command=make_delivery_list)
-main_form.create_window(350, 260, window=delivery_button, height=50, width=150)
+main_form.create_window(350, 360, window=delivery_button, height=50, width=150)
+
+clear_button = ttk.Button(text='CLEAR ALL', command=clear_all)
+main_form.create_window(250, 450, window=clear_button, height=50, width=150)
 
 root.mainloop()
