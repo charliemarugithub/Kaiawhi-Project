@@ -247,6 +247,7 @@ def make_packing_list():
 
         del sub_and_totals['Suburb']
 
+        '''
         print(sub_and_totals)
         # creating variable dict_tables to take dict values
         dict_values = sub_and_totals.values()
@@ -256,7 +257,7 @@ def make_packing_list():
             print(frequency)
 
 
-        '''
+        
         # creating another dictionary to count keys frequency
         # this counts keys only, not values
         # Do I need this right now? No, comment out for now
