@@ -7,7 +7,7 @@ from functions import file_not_found, no_filename, no_sheet_name
 from functions import no_destination_file, packing_report_generated, delivery_report_generated
 from openpyxl.utils.exceptions import InvalidFileException
 from collections import defaultdict, Counter
-import os
+
 
 # creating instance of TK class
 root = tk.Tk()
@@ -37,6 +37,8 @@ main_form.create_window(250, 150, window=sheet_name_example_label)
 # creating entry for sheet name and placing it in root
 sheet_name_entry = tk.Entry(root, font="Helvetica, 16")
 main_form.create_window(250, 190, window=sheet_name_entry, width=350, height=25)
+
+
 '''
 # creating entry for destination file
 destination_label = tk.Label(root, text='Enter Destination file path name: ', bg='#7289f2', font="Helvetica 16")
@@ -46,6 +48,7 @@ main_form.create_window(250, 230, window=destination_label)
 destination_entry = tk.Entry(root, font="Helvetica, 16")
 main_form.create_window(250, 280, window=destination_entry, width=350, height=25)
 '''
+
 
 def make_packing_list():
     # get method for filename entry
@@ -308,10 +311,12 @@ def make_delivery_list():
         sheet.delete_cols(1, 7)
         sheet.delete_cols(9, 4)
         sheet.insert_cols(1)
+        # moving suburbs to column 1. This is required to make suburb color work
         for cell in sheet['F:F']:
             sheet.cell(row=cell.row, column=1, value=cell.value)
+        # deleting old suburbs column as not required now
         sheet.delete_cols(6)
-        sheet.delete_cols(10)
+        sheet.delete_cols(10, 6)
 
         # updating Column Names
         sheet['B1'].value = "First Name"
