@@ -3,9 +3,11 @@ import tkinter as tk
 from tkinter import ttk
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.styles.borders import BORDER_THICK
-from functions import file_not_found, no_filename, no_sheet_name, packing_report_generated, delivery_report_generated
+from functions import file_not_found, no_filename, no_sheet_name
+from functions import no_destination_file, packing_report_generated, delivery_report_generated
 from openpyxl.utils.exceptions import InvalidFileException
 from collections import defaultdict, Counter
+import os
 
 # creating instance of TK class
 root = tk.Tk()
@@ -35,7 +37,6 @@ main_form.create_window(250, 150, window=sheet_name_example_label)
 # creating entry for sheet name and placing it in root
 sheet_name_entry = tk.Entry(root, font="Helvetica, 16")
 main_form.create_window(250, 190, window=sheet_name_entry, width=350, height=25)
-
 '''
 # creating entry for destination file
 destination_label = tk.Label(root, text='Enter Destination file path name: ', bg='#7289f2', font="Helvetica 16")
@@ -46,10 +47,15 @@ destination_entry = tk.Entry(root, font="Helvetica, 16")
 main_form.create_window(250, 280, window=destination_entry, width=350, height=25)
 '''
 
-
 def make_packing_list():
     # get method for filename entry
     get_file = filename_entry.get()
+    # get_destination = destination_entry.get()
+    '''
+    # check if destination file exists
+    if not os.path.isfile(f'{get_destination.strip()}.xlsx'):
+        no_destination_file()
+    '''
 
     try:
         # loading workbook on local computer c drive using filename
@@ -263,6 +269,7 @@ def make_packing_list():
         wb.save('c:\\Users\\Charlie\\Desktop\\packing_list.xlsx')
         packing_button.config(state=tk.DISABLED)
         sheet_name_entry.delete(0, tk.END)
+        # destination_entry.delete(9, tk.END)
         packing_report_generated()
 
     except FileNotFoundError:
@@ -276,8 +283,14 @@ def make_packing_list():
 
 
 def make_delivery_list():
-    # get method for filename entry
     get_file = filename_entry.get()
+    # get_destination = destination_entry.get()
+    '''
+    # check if destination field is empty
+    if get_destination == '':
+        no_destination_file()
+    else:
+    '''
     try:
         # loading workbook on local computer c drive using filename
         wb = xl.load_workbook(f'{get_file.strip()}.xlsx')
@@ -426,6 +439,8 @@ def make_delivery_list():
         wb.remove(sheet)
         wb.save('c:\\Users\\Charlie\\Desktop\\delivery_list.xlsx')
         delivery_button.config(state=tk.DISABLED)
+        sheet_name_entry.delete(0, tk.END)
+        # destination_entry.delete(9, tk.END)
         delivery_report_generated()
 
     except FileNotFoundError:
@@ -443,6 +458,7 @@ def clear_all():
     packing_button.config(state=tk.ACTIVE)
     sheet_name_entry.delete(0, tk.END)
     filename_entry.delete(0, tk.END)
+    # destination_entry.delete(0, tk.END)
 
 
 packing_button = ttk.Button(text='Packing List', command=make_packing_list)
