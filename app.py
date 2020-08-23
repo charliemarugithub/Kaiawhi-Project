@@ -1,13 +1,20 @@
-import openpyxl as xl
 import tkinter as tk
-from tkinter import ttk
-from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
-from openpyxl.styles.borders import BORDER_THICK
-from functions import file_not_found, no_filename, no_sheet_name
-from functions import no_destination_file, packing_report_generated, delivery_report_generated
-from openpyxl.utils.exceptions import InvalidFileException
+
+import openpyxl as xl
+
 from collections import defaultdict, Counter
 
+from tkinter import ttk, filedialog, messagebox
+
+from openpyxl.styles.borders import BORDER_THICK
+
+from openpyxl.utils.exceptions import InvalidFileException
+
+from functions import file_not_found, no_filename, no_sheet_name
+
+from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+
+from functions import no_destination_file, packing_report_generated, delivery_report_generated
 
 # creating instance of TK class
 root = tk.Tk()
@@ -19,15 +26,17 @@ main_form.configure(background="#7289f2")
 root.title('Kaiawhi Program')
 
 # creating label for filename and placing it in root
-filename_label = tk.Label(root, text='Enter source file path name: ', bg='#7289f2', font="Helvetica 16")
+filename_label = tk.Label(root, text='Select Source File Name: ', bg='#7289f2', font="Helvetica 16")
 main_form.create_window(250, 40, window=filename_label)
 
-# creating entry for filename and placing it in root
-filename_entry = tk.Entry(root, font="Helvetica, 16")
-main_form.create_window(250, 80, window=filename_entry, width=350, height=25)
+filename = ''
+
+# creating entry label for filename and placing it in root
+filename_entry_label = tk.Label(root, text=filename, bg='#7289f2', font="Helvetica, 16")
+main_form.create_window(250, 80, window=filename_entry_label)
 
 # creating label for sheet name and placing it in root
-sheet_name_label = tk.Label(root, text='Enter new sheet name:', bg='#7289f2', font="Helvetica 16")
+sheet_name_label = tk.Label(root, text='Enter New Sheet Name:', bg='#7289f2', font="Helvetica 16")
 main_form.create_window(250, 120, window=sheet_name_label)
 
 # creating entry for sheet name  and placing it in root
@@ -36,21 +45,69 @@ main_form.create_window(250, 150, window=sheet_name_example_label)
 
 # creating entry for sheet name and placing it in root
 sheet_name_entry = tk.Entry(root, font="Helvetica, 16")
-main_form.create_window(250, 190, window=sheet_name_entry, width=350, height=25)
-
+main_form.create_window(250, 190, window=sheet_name_entry, width=380, height=25)
 
 # creating entry for destination file
-destination_label = tk.Label(root, text='Enter Destination file path name: ', bg='#7289f2', font="Helvetica 16")
-main_form.create_window(250, 230, window=destination_label)
+destination_label = tk.Label(root, text='Select Or Enter Destination File Name: ', bg='#7289f2', font="Helvetica 16")
+main_form.create_window(250, 240, window=destination_label)
 
 # creating entry for filename destination $ placing it in root
 destination_entry = tk.Entry(root, font="Helvetica, 16")
-main_form.create_window(250, 280, window=destination_entry, width=350, height=25)
+main_form.create_window(250, 285, window=destination_entry, width=380, height=25)
+# destination_entry.config(state=tk.DISABLED)
+
+
+# creating menu bar
+menubar = tk.Menu(root)
+root.config(menu=menubar)
+
+# Create the submenu
+
+subMenu = tk.Menu(menubar, tearoff=0)
+
+
+# browse computer for source file
+def browse_file():
+    global filename
+    filename = filedialog.askopenfilename(initialdir='c:\\', title='Open File',
+                                          filetypes=(('Excel Files', '*.xlsx'), ('All Files', '*.*')))
+    filename_entry_label = filename
+
+
+'''
+# Save As File
+def save_as_file():
+    save_file = filedialog.save(defaultextension='*.*', initialdir='c:\\', title='Save File', filetypes=(('Excel Files', '*.xlsx'), ('All Files', '*.*')))
+    print(save_file)
+'''
+
+
+def destination_file():
+    global dest_filename
+    dest_filename = filedialog.askopenfilename()
+    destination_entry['text'] = dest_filename
+    print(dest_filename)
+
+
+menubar.add_cascade(label="File", menu=subMenu)
+subMenu.add_command(label="Open  Source File", command=browse_file)
+subMenu.add_command(label="Save As", command=destination_file)
+subMenu.add_command(label="Exit Program", command=root.destroy)
+
+
+def about_app():
+    tk.messagebox.showinfo('About Kaiawhi App', 'Build Version 1.0 23 Aug 2020: \n'
+                                                'Automation Program specific to Kaiawhi Packing and Delivery Reports.')
+
+
+subMenu = tk.Menu(menubar, tearoff=0)
+menubar.add_cascade(label="Help", menu=subMenu)
+subMenu.add_command(label="About Us", command=about_app)
 
 
 def make_packing_list():
     # get method for filename entry
-    get_file = filename_entry.get()
+    get_file = filename_entry_label.get()
     get_destination = destination_entry.get()
     '''
     # check if destination file exists
@@ -60,7 +117,7 @@ def make_packing_list():
 
     try:
         # loading workbook on local computer c drive using filename
-        wb = xl.load_workbook(f'{get_file.strip()}.xlsx')
+        wb = xl.load_workbook(f'{get_file}')
 
         # working with sheet1 on wb 'workbook'
         sheet = wb['Form responses 3']
@@ -298,7 +355,7 @@ def make_delivery_list():
     '''
     try:
         # loading workbook on local computer c drive using filename
-        wb = xl.load_workbook(f'{get_file.strip()}.xlsx')
+        wb = xl.load_workbook(f'{get_file}')
 
         # working with sheet1 on wb 'workbook'
         sheet = wb['Form responses 3']
