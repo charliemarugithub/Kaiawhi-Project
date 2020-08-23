@@ -39,7 +39,6 @@ sheet_name_entry = tk.Entry(root, font="Helvetica, 16")
 main_form.create_window(250, 190, window=sheet_name_entry, width=350, height=25)
 
 
-'''
 # creating entry for destination file
 destination_label = tk.Label(root, text='Enter Destination file path name: ', bg='#7289f2', font="Helvetica 16")
 main_form.create_window(250, 230, window=destination_label)
@@ -47,13 +46,12 @@ main_form.create_window(250, 230, window=destination_label)
 # creating entry for filename destination $ placing it in root
 destination_entry = tk.Entry(root, font="Helvetica, 16")
 main_form.create_window(250, 280, window=destination_entry, width=350, height=25)
-'''
 
 
 def make_packing_list():
     # get method for filename entry
     get_file = filename_entry.get()
-    # get_destination = destination_entry.get()
+    get_destination = destination_entry.get()
     '''
     # check if destination file exists
     if not os.path.isfile(f'{get_destination.strip()}.xlsx'):
@@ -273,7 +271,7 @@ def make_packing_list():
         '''
 
         # saving new worksheet to desktop with name packing_list
-        wb.save('c:\\Users\\Charlie\\Desktop\\packing_list.xlsx')
+        wb.save(f'{get_destination}.xlsx')
         packing_button.config(state=tk.DISABLED)
         sheet_name_entry.delete(0, tk.END)
         # destination_entry.delete(9, tk.END)
@@ -291,7 +289,7 @@ def make_packing_list():
 
 def make_delivery_list():
     get_file = filename_entry.get()
-    # get_destination = destination_entry.get()
+    get_destination = destination_entry.get()
     '''
     # check if destination field is empty
     if get_destination == '':
@@ -446,10 +444,10 @@ def make_delivery_list():
 
         # saving new worksheet to desktop with name packing_list
         wb.remove(sheet)
-        wb.save('c:\\Users\\Charlie\\Desktop\\delivery_list.xlsx')
+        wb.save(f'{get_destination}.xlsx')
         delivery_button.config(state=tk.DISABLED)
         sheet_name_entry.delete(0, tk.END)
-        # destination_entry.delete(9, tk.END)
+        destination_entry.delete(9, tk.END)
         delivery_report_generated()
 
     except FileNotFoundError:
@@ -467,7 +465,7 @@ def clear_all():
     packing_button.config(state=tk.ACTIVE)
     sheet_name_entry.delete(0, tk.END)
     filename_entry.delete(0, tk.END)
-    # destination_entry.delete(0, tk.END)
+    destination_entry.delete(0, tk.END)
 
 
 packing_button = ttk.Button(text='Packing List', command=make_packing_list)
