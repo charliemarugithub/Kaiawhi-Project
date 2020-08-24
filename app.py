@@ -32,8 +32,8 @@ main_form.create_window(250, 40, window=filename_label)
 filename = ''
 
 # creating entry label for filename and placing it in root
-filename_entry_label = tk.Label(root, text='----', bg='#7289f2', font="Helvetica, 16")
-main_form.create_window(250, 80, window=filename_entry_label)
+filename_entry = tk.Entry(root, font="Helvetica, 16")
+main_form.create_window(250, 80, window=filename_entry, width=380, height=25)
 
 # creating label for sheet name and placing it in root
 sheet_name_label = tk.Label(root, text='Enter New Sheet Name:', bg='#7289f2', font="Helvetica 16")
@@ -108,8 +108,7 @@ subMenu.add_command(label="About Us", command=about_app)
 
 def make_packing_list():
     # get method for filename entry
-    get_file = filename_entry_label
-    print(get_file)
+    get_file = filename_entry.get()
     get_destination = destination_entry.get()
     '''
     # check if destination file exists
@@ -131,22 +130,26 @@ def make_packing_list():
         sheet_name = wb.active
 
         # deleting columns so that columns required are left for new file
-        sheet.delete_cols(1, 9)
-        sheet.delete_cols(5)
-        sheet.insert_cols(1)
-        # moving suburbs to column 1. This is required to make suburb color work
-        for cell in sheet['D:D']:
-            sheet.cell(row=cell.row, column=1, value=cell.value)
-        # deleting old suburb columns now as not required
-        sheet.delete_cols(4)
-        sheet.delete_cols(11, 6)
+        sheet.delete_cols(1, 12)
+        sheet.delete_cols(2)
+        sheet.insert_cols(7)
+        sheet.delete_cols(2)
+
+        # moving Box Order to column 6 for better reading of numbers
+        for cell in sheet['C:C']:
+            sheet.cell(row=cell.row, column=6, value=cell.value)
+
+        # deleting old Box Order suburb columnnow as not required
+        sheet.delete_cols(3)
+        # deleting end columns as not required now
+        sheet.delete_cols(9, 6)
 
         # updating Column Names
-        sheet['E1'].value = "Total"
-        sheet['F1'].value = "Children"
-        sheet['G1'].value = "Adults"
-        sheet['H1'].value = "Packing Instructions"
-        sheet['I1'].value = "Are there any items you dont want included?"
+        sheet['B1'].value = "Total"
+        sheet['C1'].value = "Children"
+        sheet['D1'].value = "Adults"
+        sheet['F1'].value = "Packing Instructions"
+        sheet['G1'].value = "Are there any items you dont want included?"
 
         # calculate total number of rows and columns in source excel file
         max_rows = sheet.max_row
@@ -207,27 +210,27 @@ def make_packing_list():
                 sheet_name.cell(row=1, column=i).font = bold_font
                 # text alignment for all rows
                 sheet_name.cell(row=i, column=j).alignment = horizon_center
-                # setting all row height to 30
+                # setting all row height to 45
                 sheet_name.row_dimensions[i].height = 45
                 # setting borders for all cells
                 sheet_name.cell(row=i, column=j).border = border
-                # wrapping text on columns 8-10
+                # wrapping text on columns 5-8
+                sheet_name.cell(row=i, column=5).alignment = wrap_text
+                sheet_name.cell(row=i, column=6).alignment = wrap_text
+                sheet_name.cell(row=i, column=7).alignment = wrap_text
                 sheet_name.cell(row=i, column=8).alignment = wrap_text
-                sheet_name.cell(row=i, column=9).alignment = wrap_text
-                sheet_name.cell(row=i, column=10).alignment = wrap_text
-                # Totals column made bold
+                # Boxes column made bold and center
                 sheet_name.cell(row=i, column=5).font = bold_font
+                sheet_name.cell(row=i, column=5).alignment = horizon_center
                 # setting specific column widths
                 sheet_name.column_dimensions['A'].width = 20
-                sheet_name.column_dimensions['B'].width = 30
-                sheet_name.column_dimensions['C'].width = 25
-                sheet_name.column_dimensions['D'].width = 25
-                sheet_name.column_dimensions['E'].width = 9
-                sheet_name.column_dimensions['F'].width = 13
-                sheet_name.column_dimensions['G'].width = 10
+                sheet_name.column_dimensions['B'].width = 12
+                sheet_name.column_dimensions['C'].width = 12
+                sheet_name.column_dimensions['D'].width = 12
+                sheet_name.column_dimensions['E'].width = 16
+                sheet_name.column_dimensions['F'].width = 45
+                sheet_name.column_dimensions['G'].width = 45
                 sheet_name.column_dimensions['H'].width = 45
-                sheet_name.column_dimensions['I'].width = 45
-                sheet_name.column_dimensions['J'].width = 45
 
         wb.remove(sheet)
         # create 2nd sheet to copy over suburb and totals
@@ -308,6 +311,7 @@ def make_packing_list():
 
 def make_delivery_list():
     get_file = filename_entry.get()
+    print(get_file)
     get_destination = destination_entry.get()
     '''
     # check if destination field is empty
