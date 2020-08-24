@@ -1,0 +1,15 @@
+
+*.pyc
+app.spec
+build/app/Analysis-00.toc
+build/app/app.exe.manifest
+build/app/base_library.zip
+build/app/EXE-00.toc
+build/app/PKG-00.pkg
+build/app/PKG-00.toc
+build/app/PYZ-00.pyz
+build/app/PYZ-00.toc
+build/app/Tree-00.toc
+build/app/Tree-01.toc
+build/app/warn-app.txt
+build/app/xref-app.html
