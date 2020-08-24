@@ -32,7 +32,7 @@ main_form.create_window(250, 40, window=filename_label)
 filename = ''
 
 # creating entry label for filename and placing it in root
-filename_entry_label = tk.Label(root, text=filename, bg='#7289f2', font="Helvetica, 16")
+filename_entry_label = tk.Label(root, text='----', bg='#7289f2', font="Helvetica, 16")
 main_form.create_window(250, 80, window=filename_entry_label)
 
 # creating label for sheet name and placing it in root
@@ -72,6 +72,7 @@ def browse_file():
     filename = filedialog.askopenfilename(initialdir='c:\\', title='Open File',
                                           filetypes=(('Excel Files', '*.xlsx'), ('All Files', '*.*')))
     filename_entry_label = filename
+    print('File path is ' + filename_entry_label)
 
 
 '''
@@ -107,7 +108,8 @@ subMenu.add_command(label="About Us", command=about_app)
 
 def make_packing_list():
     # get method for filename entry
-    get_file = filename_entry_label.get()
+    get_file = filename_entry_label
+    print(get_file)
     get_destination = destination_entry.get()
     '''
     # check if destination file exists
