@@ -171,23 +171,9 @@ def make_packing_list():
         col_panmure = PatternFill(fgColor='80e098', fill_type='solid')
         col_ptengland = PatternFill(fgColor='d9b36c', fill_type='solid')
         col_gi = PatternFill(fgColor='8d9cf0', fill_type='solid')
-        col_stjohns = PatternFill(fgColor='ba6cd9', fill_type='solid')
-        col_glendowie = PatternFill(fgColor='d98aed', fill_type='solid')
-        col_mtwell = PatternFill(fgColor='a1f0a9', fill_type='solid')
-        col_greenlane = PatternFill(fgColor='f0daa1', fill_type='solid')
-        col_mangere = PatternFill(fgColor='e4f0a1', fill_type='solid')
-        col_pakuranga = PatternFill(fgColor='e4e86d', fill_type='solid')
-        col_clendon = PatternFill(fgColor='edc0b4', fill_type='solid')
-        col_henderson = PatternFill(fgColor='eddcb4', fill_type='solid')
-        col_howick = PatternFill(fgColor='dbedb4', fill_type='solid')
-        col_karaka = PatternFill(fgColor='84b07f', fill_type='solid')
-        col_manukau = PatternFill(fgColor='7fb099', fill_type='solid')
-        col_manurewa = PatternFill(fgColor='98edc5', fill_type='solid')
-        col_meadowbank = PatternFill(fgColor='77d1c8', fill_type='solid')
-        col_onehunga = PatternFill(fgColor='87d0ed', fill_type='solid')
-        col_otahuhu = PatternFill(fgColor='bebdf2', fill_type='solid')
-        col_waiotaiki = PatternFill(fgColor='9292a6', fill_type='solid')
-        col_wattle = PatternFill(fgColor='cebad6', fill_type='solid')
+        col_ruapotaka = PatternFill(fgColor='77d1c8', fill_type='solid')
+        col_gifc = PatternFill(fgColor='87d0ed', fill_type='solid')
+        col_tamaki = PatternFill(fgColor='bebdf2', fill_type='solid')
 
         # copying the cell values from source excel file to destination excel file
         for i in range(1, max_rows):
@@ -202,46 +188,20 @@ def make_packing_list():
 
                 for row in sheet_name.iter_rows(max_row=max_rows, max_col=max_columns):
                     for cell in row:
-                        if cell.value == 'Panmure':
-                            sheet_name.cell(row=i, column=j).fill = col_panmure
-                        if cell.value == 'Clendon Park':
-                            sheet_name.cell(row=i, column=j).fill = col_clendon
-                        if cell.value == 'Point England':
-                            sheet_name.cell(row=i, column=j).fill = col_ptengland
                         if cell.value == 'Glen Innes':
                             sheet_name.cell(row=i, column=j).fill = col_gi
-                        if cell.value == 'St Johns':
-                            sheet_name.cell(row=i, column=j).fill = col_stjohns
-                        if cell.value == 'Glendowie':
-                            sheet_name.cell(row=i, column=j).fill = col_glendowie
-                        if cell.value == 'Mt Wellington':
-                            sheet_name.cell(row=i, column=j).fill = col_mtwell
-                        if cell.value == 'Greenlane':
-                            sheet_name.cell(row=i, column=j).fill = col_greenlane
-                        if cell.value == 'Mangere':
-                            sheet_name.cell(row=i, column=j).fill = col_mangere
-                        if cell.value == 'Pakuranga':
-                            sheet_name.cell(row=i, column=j).fill = col_pakuranga
-                        if cell.value == 'Henderson':
-                            sheet_name.cell(row=i, column=j).fill = col_henderson
-                        if cell.value == 'Howick':
-                            sheet_name.cell(row=i, column=j).fill = col_howick
-                        if cell.value == 'Karaka':
-                            sheet_name.cell(row=i, column=j).fill = col_karaka
-                        if cell.value == 'Manukau':
-                            sheet_name.cell(row=i, column=j).fill = col_manukau
-                        if cell.value == 'Manurewa':
-                            sheet_name.cell(row=i, column=j).fill = col_manurewa
-                        if cell.value == 'Meadowbank':
-                            sheet_name.cell(row=i, column=j).fill = col_meadowbank
-                        if cell.value == 'Onehunga':
-                            sheet_name.cell(row=i, column=j).fill = col_onehunga
-                        if cell.value == 'Otahuhu':
-                            sheet_name.cell(row=i, column=j).fill = col_otahuhu
-                        if cell.value == 'Waiotaiki Bay':
-                            sheet_name.cell(row=i, column=j).fill = col_waiotaiki
-                        if cell.value == 'Wattle Downs':
-                            sheet_name.cell(row=i, column=j).fill = col_wattle
+                        if cell.value == 'Panmure':
+                            sheet_name.cell(row=i, column=j).fill = col_panmure
+                        if cell.value == 'Point England':
+                            sheet_name.cell(row=i, column=j).fill = col_ptengland
+                        if cell.value == 'Ruapotaka Marae':
+                            sheet_name.cell(row=i, column=j).fill = col_ruapotaka
+                        if cell.value == 'GIFC':
+                            sheet_name.cell(row=i, column=j).fill = col_gifc
+                        if cell.value == 'Tamaki College':
+                            sheet_name.cell(row=i, column=j).fill = col_tamaki
+
+
 
                 # making row 1 bold font
                 sheet_name.cell(row=1, column=i).font = bold_font
@@ -406,23 +366,9 @@ def make_delivery_list():
         col_panmure = PatternFill(fgColor='80e098', fill_type='solid')
         col_ptengland = PatternFill(fgColor='d9b36c', fill_type='solid')
         col_gi = PatternFill(fgColor='8d9cf0', fill_type='solid')
-        col_stjohns = PatternFill(fgColor='ba6cd9', fill_type='solid')
-        col_glendowie = PatternFill(fgColor='d98aed', fill_type='solid')
-        col_mtwell = PatternFill(fgColor='a1f0a9', fill_type='solid')
-        col_greenlane = PatternFill(fgColor='f0daa1', fill_type='solid')
-        col_mangere = PatternFill(fgColor='e4f0a1', fill_type='solid')
-        col_pakuranga = PatternFill(fgColor='e4e86d', fill_type='solid')
-        col_clendon = PatternFill(fgColor='edc0b4', fill_type='solid')
-        col_henderson = PatternFill(fgColor='eddcb4', fill_type='solid')
-        col_howick = PatternFill(fgColor='dbedb4', fill_type='solid')
-        col_karaka = PatternFill(fgColor='84b07f', fill_type='solid')
-        col_manukau = PatternFill(fgColor='7fb099', fill_type='solid')
-        col_manurewa = PatternFill(fgColor='98edc5', fill_type='solid')
-        col_meadowbank = PatternFill(fgColor='77d1c8', fill_type='solid')
-        col_onehunga = PatternFill(fgColor='87d0ed', fill_type='solid')
-        col_otahuhu = PatternFill(fgColor='bebdf2', fill_type='solid')
-        col_waiotaiki = PatternFill(fgColor='9292a6', fill_type='solid')
-        col_wattle = PatternFill(fgColor='cebad6', fill_type='solid')
+        col_ruapotaka = PatternFill(fgColor='77d1c8', fill_type='solid')
+        col_gifc = PatternFill(fgColor='87d0ed', fill_type='solid')
+        col_tamaki = PatternFill(fgColor='bebdf2', fill_type='solid')
 
         # copying the cell values from source excel file to destination excel file
         for i in range(1, max_rows):
@@ -436,46 +382,18 @@ def make_delivery_list():
 
                 for row in sheet_name.iter_rows(max_row=max_rows, max_col=max_columns):
                     for cell in row:
-                        if cell.value == 'Panmure':
-                            sheet_name.cell(row=i, column=j).fill = col_panmure
-                        if cell.value == 'Clendon Park':
-                            sheet_name.cell(row=i, column=j).fill = col_clendon
-                        if cell.value == 'Point England':
-                            sheet_name.cell(row=i, column=j).fill = col_ptengland
                         if cell.value == 'Glen Innes':
                             sheet_name.cell(row=i, column=j).fill = col_gi
-                        if cell.value == 'St Johns':
-                            sheet_name.cell(row=i, column=j).fill = col_stjohns
-                        if cell.value == 'Glendowie':
-                            sheet_name.cell(row=i, column=j).fill = col_glendowie
-                        if cell.value == 'Mt Wellington':
-                            sheet_name.cell(row=i, column=j).fill = col_mtwell
-                        if cell.value == 'Greenlane':
-                            sheet_name.cell(row=i, column=j).fill = col_greenlane
-                        if cell.value == 'Mangere':
-                            sheet_name.cell(row=i, column=j).fill = col_mangere
-                        if cell.value == 'Pakuranga':
-                            sheet_name.cell(row=i, column=j).fill = col_pakuranga
-                        if cell.value == 'Henderson':
-                            sheet_name.cell(row=i, column=j).fill = col_henderson
-                        if cell.value == 'Howick':
-                            sheet_name.cell(row=i, column=j).fill = col_howick
-                        if cell.value == 'Karaka':
-                            sheet_name.cell(row=i, column=j).fill = col_karaka
-                        if cell.value == 'Manukau':
-                            sheet_name.cell(row=i, column=j).fill = col_manukau
-                        if cell.value == 'Manurewa':
-                            sheet_name.cell(row=i, column=j).fill = col_manurewa
-                        if cell.value == 'Meadowbank':
-                            sheet_name.cell(row=i, column=j).fill = col_meadowbank
-                        if cell.value == 'Onehunga':
-                            sheet_name.cell(row=i, column=j).fill = col_onehunga
-                        if cell.value == 'Otahuhu':
-                            sheet_name.cell(row=i, column=j).fill = col_otahuhu
-                        if cell.value == 'Waiotaiki Bay':
-                            sheet_name.cell(row=i, column=j).fill = col_waiotaiki
-                        if cell.value == 'Wattle Downs':
-                            sheet_name.cell(row=i, column=j).fill = col_wattle
+                        if cell.value == 'Panmure':
+                            sheet_name.cell(row=i, column=j).fill = col_panmure
+                        if cell.value == 'Point England':
+                            sheet_name.cell(row=i, column=j).fill = col_ptengland
+                        if cell.value == 'Ruapotaka Marae':
+                            sheet_name.cell(row=i, column=j).fill = col_ruapotaka
+                        if cell.value == 'GIFC':
+                            sheet_name.cell(row=i, column=j).fill = col_gifc
+                        if cell.value == 'Tamaki College':
+                            sheet_name.cell(row=i, column=j).fill = col_tamaki
 
                 # making row 1 bold font
                 sheet_name.cell(row=1, column=i).font = bold_font
