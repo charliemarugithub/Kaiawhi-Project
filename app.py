@@ -187,9 +187,9 @@ def make_packing_list():
                 # writing the read value to destination excel file
                 sheet_name.cell(row=i, column=j).value = c.value
                 sheet_name.cell(row=i, column=j).font = cell_font
-                # creating dictionary of Suburb and Totals
 
-                for row in sheet_name.iter_rows(max_row=max_rows, max_col=max_columns):
+                # for loop to iterate over Suburbs columns to determine color
+                for row in sheet_name.iter_rows(max_row=max_rows, max_col=1):
                     for cell in row:
                         if cell.value == 'Glen Innes':
                             sheet_name.cell(row=i, column=j).fill = col_gi
@@ -203,8 +203,6 @@ def make_packing_list():
                             sheet_name.cell(row=i, column=j).fill = col_gifc
                         if cell.value == 'Tamaki College':
                             sheet_name.cell(row=i, column=j).fill = col_tamaki
-
-
 
                 # making row 1 bold font
                 sheet_name.cell(row=1, column=i).font = bold_font
@@ -232,65 +230,20 @@ def make_packing_list():
                 sheet_name.column_dimensions['G'].width = 45
                 sheet_name.column_dimensions['H'].width = 45
 
+                for total in sheet_name.values:
+                    for values in total:
+                        print(values)
+                        '''
+                        if total.value == 1 and total.value <= 6:
+                            box.value = 1
+                        elif total.value == 7 and total.value <= 10:
+                            box.value = 2
+                        elif total.value > 10:
+                            box.value = 3
+                        else:
+                            box.value = 0
+                        '''
         wb.remove(sheet)
-        # create 2nd sheet to copy over suburb and totals
-        box_name = 'Boxes'
-        box_sheet = wb.create_sheet("Sheet B", 1)
-        box_sheet.title = box_name
-        box_name = wb.active
-
-        # creating 2 lists to take suburbs and totals
-        suburbs_list = []
-        totals_list = []
-
-        # creating dictionary to collect 2 lists above
-        sub_and_totals = defaultdict(list)
-
-        # iterating over suburbs and appending to suburbs list
-        for cell in sheet['A:A']:
-            # writing values to new sheet
-            box_sheet.cell(row=cell.row, column=1, value=cell.value)
-            suburbs_list.append(cell.value)
-        # iterating over totals and appending to totals list
-        for cell in sheet['E:E']:
-            # writing values to new sheet
-            box_sheet.cell(row=cell.row, column=2, value=cell.value)
-            totals_list.append(cell.value)
-
-        # removing row 1 as not needed for dictionary
-        box_sheet.delete_rows(1)
-
-        # iterating over both lists to append to dictionary without duplicate
-        # keys (zip)  and appending values that belong to the same key
-        for i, j in zip(suburbs_list, totals_list):
-            sub_and_totals[i].append(j)
-
-        del sub_and_totals['Suburb']
-
-        '''
-        print(sub_and_totals)
-        # creating variable dict_tables to take dict values
-        dict_values = sub_and_totals.values()
-        # counting how often duplicates values are in this dict
-        for counter in dict_values:
-            frequency = Counter(counter)
-            print(frequency)
-
-
-        
-        # creating another dictionary to count keys frequency
-        # this counts keys only, not values
-        # Do I need this right now? No, comment out for now
-
-        frequency = {}
-        for item in sub_and_totals:
-            if item in frequency:
-                frequency[item] += 1
-            else:
-                frequency[item] = 1
-
-        print(frequency)
-        '''
 
         # saving new worksheet to desktop with name packing_list
         wb.save(f'{get_destination}.xlsx')
@@ -311,7 +264,6 @@ def make_packing_list():
 
 def make_delivery_list():
     get_file = filename_entry.get()
-    print(get_file)
     get_destination = destination_entry.get()
     '''
     # check if destination field is empty
@@ -336,17 +288,20 @@ def make_delivery_list():
         sheet.delete_cols(1, 7)
         sheet.delete_cols(9, 4)
         sheet.insert_cols(1)
+        sheet.delete_cols(3)
+        sheet.delete_cols(9, 1)
+
         # moving suburbs to column 1. This is required to make suburb color work
         for cell in sheet['F:F']:
             sheet.cell(row=cell.row, column=1, value=cell.value)
         # deleting old suburbs column as not required now
         sheet.delete_cols(6)
-        sheet.delete_cols(10, 6)
-
+        sheet.delete_cols(8, 8)
+        sheet.insert_cols(8)
         # updating Column Names
         sheet['B1'].value = "First Name"
         sheet['G1'].value = "Delivery Instructions"
-        sheet['H1'].value = "Total"
+        sheet['H1'].value = "Box Order"
 
         # calculate total number of rows and columns in source excel file
         max_rows = sheet.max_row
@@ -384,6 +339,7 @@ def make_delivery_list():
                 sheet_name.cell(row=i, column=j).value = c.value
                 sheet_name.cell(row=i, column=j).font = cell_font
 
+                # for loop to iterate over Suburbs columns to determine color
                 for row in sheet_name.iter_rows(max_row=max_rows, max_col=max_columns):
                     for cell in row:
                         if cell.value == 'Glen Innes':
@@ -401,26 +357,27 @@ def make_delivery_list():
 
                 # making row 1 bold font
                 sheet_name.cell(row=1, column=i).font = bold_font
+                # wrapping text on columns 3 & 7
+                sheet_name.cell(row=i, column=3).alignment = wrap_text
+                sheet_name.cell(row=i, column=7).alignment = wrap_text
                 # text alignment for all rows
                 sheet_name.cell(row=i, column=j).alignment = horizon_center
+                sheet_name.cell(row=1, column=j).alignment = horizon_center
                 # setting all row height to 30
                 sheet_name.row_dimensions[i].height = 65
                 # setting borders for all cells
                 sheet_name.cell(row=i, column=j).border = border
-                # wrapping text on columns 7 & 9
-                sheet_name.cell(row=i, column=7).alignment = wrap_text
-                sheet_name.cell(row=i, column=9).alignment = wrap_text
                 # Totals column made bold
                 sheet_name.cell(row=i, column=8).font = bold_font
                 # setting specific column widths
                 sheet_name.column_dimensions['A'].width = 18
                 sheet_name.column_dimensions['B'].width = 18
-                sheet_name.column_dimensions['C'].width = 20
+                sheet_name.column_dimensions['C'].width = 24
                 sheet_name.column_dimensions['D'].width = 30
                 sheet_name.column_dimensions['E'].width = 25
                 sheet_name.column_dimensions['F'].width = 25
                 sheet_name.column_dimensions['G'].width = 45
-                sheet_name.column_dimensions['H'].width = 12
+                sheet_name.column_dimensions['H'].width = 15
                 sheet_name.column_dimensions['I'].width = 45
 
         # saving new worksheet to desktop with name packing_list
@@ -428,7 +385,7 @@ def make_delivery_list():
         wb.save(f'{get_destination}.xlsx')
         delivery_button.config(state=tk.DISABLED)
         sheet_name_entry.delete(0, tk.END)
-        destination_entry.delete(9, tk.END)
+        destination_entry.delete(0, tk.END)
         delivery_report_generated()
 
     except FileNotFoundError:
