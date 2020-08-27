@@ -230,19 +230,6 @@ def make_packing_list():
                 sheet_name.column_dimensions['G'].width = 45
                 sheet_name.column_dimensions['H'].width = 45
 
-                for total in sheet_name.values:
-                    for values in total:
-                        print(values)
-                        '''
-                        if total.value == 1 and total.value <= 6:
-                            box.value = 1
-                        elif total.value == 7 and total.value <= 10:
-                            box.value = 2
-                        elif total.value > 10:
-                            box.value = 3
-                        else:
-                            box.value = 0
-                        '''
         wb.remove(sheet)
 
         # saving new worksheet to desktop with name packing_list
@@ -297,7 +284,8 @@ def make_delivery_list():
         # deleting old suburbs column as not required now
         sheet.delete_cols(6)
         sheet.delete_cols(8, 8)
-        sheet.insert_cols(8)
+        sheet.insert_cols(7)
+
         # updating Column Names
         sheet['B1'].value = "First Name"
         sheet['G1'].value = "Delivery Instructions"
