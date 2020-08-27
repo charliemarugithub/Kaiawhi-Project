@@ -283,8 +283,8 @@ def make_delivery_list():
             sheet.cell(row=cell.row, column=1, value=cell.value)
         # deleting old suburbs column as not required now
         sheet.delete_cols(6)
-        sheet.delete_cols(8, 8)
-        sheet.insert_cols(7)
+        sheet.delete_cols(9, 8)
+        #sheet.insert_cols(8)
 
         # updating Column Names
         sheet['B1'].value = "First Name"
